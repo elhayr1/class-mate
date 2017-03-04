@@ -1,0 +1,9 @@
+deside what kind of database to use for storing data
+allow refresh data and dowload it again to db
+allow refresh classes window to get updated data
+allow auto refresh with timer to get updated data
+allow to pick class from list
+allow to search for certain times
+allow to show all
+add banner to the buttom of the program
+use System.Xml to extract data and search for numbers
