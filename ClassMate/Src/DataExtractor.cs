@@ -132,17 +132,17 @@ namespace ClassMate.Src
             switch (day)
             {
                 case 0:
-                    return "Sunday";
+                    return "ראשון";
                 case 1:
-                    return "Monday";
+                    return "שני";
                 case 2:
-                    return "Tuesday";
+                    return "שלישי";
                 case 3:
-                    return "Wednesday";
+                    return "רביעי";
                 case 4:
-                    return "Thursday";
+                    return "חמישי";
                 case 5:
-                    return "Friday";
+                    return "שישי";
             }
             return "";
         }

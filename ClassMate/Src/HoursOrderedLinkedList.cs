@@ -24,17 +24,9 @@ namespace ClassMate.Src
 
         public void add(HourNode new_hour_node)
         {
-            int finder_counter = 0;
-
+            
             if (size_ == 0)
                 head_ = tail_ = new_hour_node;
-            else if (size_ == 1)
-            {
-                if (new_hour_node < head_)
-                    addToHead(new_hour_node);
-                else
-                    addToTail(new_hour_node);
-            }
             else
             {
                 HourNode temp_iterator = head_;
@@ -43,7 +35,6 @@ namespace ClassMate.Src
                        new_hour_node > temp_iterator)
                 {
                     temp_iterator = temp_iterator.next;
-                    finder_counter++;
                 }
 
                 if (temp_iterator.next == null)
@@ -52,21 +43,22 @@ namespace ClassMate.Src
                         addBefore(new_hour_node, temp_iterator);
                     else
                         addToTail(new_hour_node);
-                } 
-                else if (temp_iterator.prev == null)
-                    addToHead(new_hour_node);
-                else
-                    addBefore(new_hour_node, temp_iterator);
+                }
             }
             size_++;
         }
 
         private void addBefore(HourNode new_hour_node, HourNode curr_node)
         {
-            new_hour_node.next = curr_node;
-            curr_node.prev.next = new_hour_node;
-            new_hour_node.prev = curr_node.prev;
-            curr_node.prev = new_hour_node;
+            if (curr_node.prev == null)
+                addToHead(new_hour_node);
+            else
+            {
+                new_hour_node.next = curr_node;
+                curr_node.prev.next = new_hour_node;
+                new_hour_node.prev = curr_node.prev;
+                curr_node.prev = new_hour_node;
+            }
         }
 
         private void addToHead(HourNode new_hour_node)
@@ -85,18 +77,23 @@ namespace ClassMate.Src
 
         public int size() { return size_; }
 
-        public Hour getFreeTime(Hour search_time)
+        public FreeTime getFreeTime(Hour search_time)
         {
+            if (search_time < head_.lower_hour)
+                return new FreeTime(search_time, head_.lower_hour);
+
             HourNode temp_iterator = head_;
             while (temp_iterator.next != null)
             {
-                if (search_time > temp_iterator.lower_hour &&
-                    search_time < temp_iterator.upper_hour)
-                    return temp_iterator.next.lower_hour - temp_iterator.upper_hour;
+ 
+                //search time is between hour nodes
+                if  (search_time >= temp_iterator.upper_hour && search_time <= temp_iterator.next.lower_hour) 
+                    return new FreeTime(search_time, temp_iterator.next.lower_hour); 
 
-                if (search_time > temp_iterator.upper_hour ||
-                    search_time == temp_iterator.upper_hour)
-                    return temp_iterator.next.lower_hour - search_time;
+                //search time is inside hour node range
+                else if (search_time >= temp_iterator.lower_hour && 
+                         search_time <= temp_iterator.upper_hour) 
+                    return new FreeTime(temp_iterator.upper_hour, temp_iterator.next.lower_hour);
 
                 temp_iterator = temp_iterator.next;
             }

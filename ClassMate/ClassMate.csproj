@@ -58,6 +58,8 @@
     </Compile>
     <Compile Include="Src\ClassRoom.cs" />
     <Compile Include="Src\DataExtractor.cs" />
+    <Compile Include="Src\FreeTime.cs" />
+    <Compile Include="Src\Hour.cs" />
     <Compile Include="Src\HoursOrderedLinkedList.cs" />
     <Compile Include="Src\HourNode.cs" />
     <Compile Include="Src\program.cs" />

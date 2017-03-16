@@ -30,18 +30,15 @@
         {
             this.tabs_window = new System.Windows.Forms.TabControl();
             this.srch_tab = new System.Windows.Forms.TabPage();
-            this.search_by_grbx = new System.Windows.Forms.GroupBox();
+            this.filter_grbx = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.time_to_cmbx = new System.Windows.Forms.ComboBox();
             this.time_from_cmbx = new System.Windows.Forms.ComboBox();
             this.day_cmbx = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.search_btn = new System.Windows.Forms.Button();
             this.results_table = new System.Windows.Forms.DataGridView();
-            this.class_id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.building_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.floor_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.advanced_srch_tb = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,11 +48,16 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.time_to_cmbx = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.advanced_srch_rbtn = new System.Windows.Forms.RadioButton();
+            this.fast_srch_rbtn = new System.Windows.Forms.RadioButton();
+            this.class_id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.building_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.floor_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabs_window.SuspendLayout();
             this.srch_tab.SuspendLayout();
-            this.search_by_grbx.SuspendLayout();
+            this.filter_grbx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.results_table)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -67,51 +69,75 @@
             this.tabs_window.Controls.Add(this.advanced_srch_tb);
             this.tabs_window.Location = new System.Drawing.Point(3, 3);
             this.tabs_window.Name = "tabs_window";
+            this.tabs_window.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tabs_window.SelectedIndex = 0;
             this.tabs_window.Size = new System.Drawing.Size(465, 416);
             this.tabs_window.TabIndex = 0;
             // 
             // srch_tab
             // 
-            this.srch_tab.Controls.Add(this.search_by_grbx);
+            this.srch_tab.Controls.Add(this.fast_srch_rbtn);
+            this.srch_tab.Controls.Add(this.advanced_srch_rbtn);
+            this.srch_tab.Controls.Add(this.filter_grbx);
             this.srch_tab.Controls.Add(this.search_btn);
             this.srch_tab.Controls.Add(this.results_table);
             this.srch_tab.Location = new System.Drawing.Point(4, 22);
             this.srch_tab.Name = "srch_tab";
             this.srch_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.srch_tab.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.srch_tab.Size = new System.Drawing.Size(457, 390);
             this.srch_tab.TabIndex = 0;
-            this.srch_tab.Text = "Search";
+            this.srch_tab.Text = "חיפוש כללי";
             this.srch_tab.UseVisualStyleBackColor = true;
             // 
-            // search_by_grbx
+            // filter_grbx
             // 
-            this.search_by_grbx.Controls.Add(this.label3);
-            this.search_by_grbx.Controls.Add(this.time_to_cmbx);
-            this.search_by_grbx.Controls.Add(this.time_from_cmbx);
-            this.search_by_grbx.Controls.Add(this.day_cmbx);
-            this.search_by_grbx.Controls.Add(this.label2);
-            this.search_by_grbx.Controls.Add(this.label1);
-            this.search_by_grbx.Location = new System.Drawing.Point(22, 35);
-            this.search_by_grbx.Name = "search_by_grbx";
-            this.search_by_grbx.Size = new System.Drawing.Size(410, 73);
-            this.search_by_grbx.TabIndex = 3;
-            this.search_by_grbx.TabStop = false;
-            this.search_by_grbx.Text = "Search By";
+            this.filter_grbx.Controls.Add(this.label3);
+            this.filter_grbx.Controls.Add(this.time_to_cmbx);
+            this.filter_grbx.Controls.Add(this.time_from_cmbx);
+            this.filter_grbx.Controls.Add(this.day_cmbx);
+            this.filter_grbx.Controls.Add(this.label2);
+            this.filter_grbx.Controls.Add(this.label1);
+            this.filter_grbx.Enabled = false;
+            this.filter_grbx.Location = new System.Drawing.Point(22, 35);
+            this.filter_grbx.Name = "filter_grbx";
+            this.filter_grbx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.filter_grbx.Size = new System.Drawing.Size(410, 73);
+            this.filter_grbx.TabIndex = 3;
+            this.filter_grbx.TabStop = false;
+            this.filter_grbx.Text = "סנן";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(108, 16);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "עד שעה:";
+            // 
+            // time_to_cmbx
+            // 
+            this.time_to_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.time_to_cmbx.Location = new System.Drawing.Point(67, 40);
+            this.time_to_cmbx.Name = "time_to_cmbx";
+            this.time_to_cmbx.Size = new System.Drawing.Size(88, 21);
+            this.time_to_cmbx.TabIndex = 4;
             // 
             // time_from_cmbx
             // 
             this.time_from_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.time_from_cmbx.Location = new System.Drawing.Point(112, 40);
+            this.time_from_cmbx.Location = new System.Drawing.Point(203, 40);
             this.time_from_cmbx.Name = "time_from_cmbx";
-            this.time_from_cmbx.Size = new System.Drawing.Size(90, 21);
+            this.time_from_cmbx.Size = new System.Drawing.Size(101, 21);
             this.time_from_cmbx.TabIndex = 3;
             this.time_from_cmbx.SelectedIndexChanged += new System.EventHandler(this.time_from_cmbx_SelectedIndexChanged);
             // 
             // day_cmbx
             // 
             this.day_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.day_cmbx.Location = new System.Drawing.Point(6, 40);
+            this.day_cmbx.Location = new System.Drawing.Point(313, 40);
             this.day_cmbx.Name = "day_cmbx";
             this.day_cmbx.Size = new System.Drawing.Size(85, 21);
             this.day_cmbx.TabIndex = 2;
@@ -120,33 +146,39 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(109, 18);
+            this.label2.Location = new System.Drawing.Point(267, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Time:";
+            this.label2.Text = "משעה:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 18);
+            this.label1.Location = new System.Drawing.Point(374, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Day: ";
+            this.label1.Text = "יום:";
             // 
             // search_btn
             // 
-            this.search_btn.Location = new System.Drawing.Point(357, 355);
+            this.search_btn.Location = new System.Drawing.Point(22, 361);
             this.search_btn.Name = "search_btn";
             this.search_btn.Size = new System.Drawing.Size(75, 23);
             this.search_btn.TabIndex = 2;
-            this.search_btn.Text = "Search";
+            this.search_btn.Text = "חפש";
             this.search_btn.UseVisualStyleBackColor = true;
             this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
             // 
             // results_table
             // 
+            this.results_table.AllowUserToAddRows = false;
+            this.results_table.AllowUserToDeleteRows = false;
+            this.results_table.AllowUserToResizeRows = false;
+            this.results_table.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.results_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.results_table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.class_id_col,
@@ -154,46 +186,13 @@
             this.floor_col,
             this.avail_time_col,
             this.total_avail_time_col});
-            this.results_table.Location = new System.Drawing.Point(22, 143);
+            this.results_table.Location = new System.Drawing.Point(22, 145);
             this.results_table.Name = "results_table";
+            this.results_table.ReadOnly = true;
+            this.results_table.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.results_table.Size = new System.Drawing.Size(410, 193);
             this.results_table.TabIndex = 1;
             this.results_table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // class_id_col
-            // 
-            this.class_id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.class_id_col.HeaderText = "Class";
-            this.class_id_col.Name = "class_id_col";
-            this.class_id_col.Width = 57;
-            // 
-            // building_col
-            // 
-            this.building_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.building_col.HeaderText = "Building";
-            this.building_col.Name = "building_col";
-            this.building_col.Width = 69;
-            // 
-            // floor_col
-            // 
-            this.floor_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.floor_col.HeaderText = "Floor";
-            this.floor_col.Name = "floor_col";
-            this.floor_col.Width = 55;
-            // 
-            // avail_time_col
-            // 
-            this.avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.avail_time_col.HeaderText = "Available Time";
-            this.avail_time_col.Name = "avail_time_col";
-            this.avail_time_col.Width = 101;
-            // 
-            // total_avail_time_col
-            // 
-            this.total_avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.total_avail_time_col.HeaderText = "Total Time";
-            this.total_avail_time_col.Name = "total_avail_time_col";
-            this.total_avail_time_col.Width = 82;
             // 
             // advanced_srch_tb
             // 
@@ -202,7 +201,7 @@
             this.advanced_srch_tb.Padding = new System.Windows.Forms.Padding(3);
             this.advanced_srch_tb.Size = new System.Drawing.Size(457, 390);
             this.advanced_srch_tb.TabIndex = 1;
-            this.advanced_srch_tb.Text = "Class Info";
+            this.advanced_srch_tb.Text = "חיפוש לפי כיתה";
             this.advanced_srch_tb.UseVisualStyleBackColor = true;
             // 
             // menuStrip1
@@ -212,9 +211,11 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.menuStrip1.Size = new System.Drawing.Size(495, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -256,8 +257,8 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.aboutToolStripMenuItem.Text = "אודות";
             // 
             // flowLayoutPanel1
             // 
@@ -267,22 +268,66 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(473, 421);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // time_to_cmbx
+            // advanced_srch_rbtn
             // 
-            this.time_to_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.time_to_cmbx.Location = new System.Drawing.Point(225, 40);
-            this.time_to_cmbx.Name = "time_to_cmbx";
-            this.time_to_cmbx.Size = new System.Drawing.Size(88, 21);
-            this.time_to_cmbx.TabIndex = 4;
+            this.advanced_srch_rbtn.AutoSize = true;
+            this.advanced_srch_rbtn.Location = new System.Drawing.Point(230, 12);
+            this.advanced_srch_rbtn.Name = "advanced_srch_rbtn";
+            this.advanced_srch_rbtn.Size = new System.Drawing.Size(96, 17);
+            this.advanced_srch_rbtn.TabIndex = 4;
+            this.advanced_srch_rbtn.Text = "חיפוש מתקדם";
+            this.advanced_srch_rbtn.UseVisualStyleBackColor = true;
+            this.advanced_srch_rbtn.CheckedChanged += new System.EventHandler(this.advanced_srch_rbtn_CheckedChanged);
             // 
-            // label3
+            // fast_srch_rbtn
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(222, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Until:";
+            this.fast_srch_rbtn.AutoSize = true;
+            this.fast_srch_rbtn.Checked = true;
+            this.fast_srch_rbtn.Location = new System.Drawing.Point(346, 12);
+            this.fast_srch_rbtn.Name = "fast_srch_rbtn";
+            this.fast_srch_rbtn.Size = new System.Drawing.Size(86, 17);
+            this.fast_srch_rbtn.TabIndex = 5;
+            this.fast_srch_rbtn.TabStop = true;
+            this.fast_srch_rbtn.Text = "חיפוש מהיר";
+            this.fast_srch_rbtn.UseVisualStyleBackColor = true;
+            this.fast_srch_rbtn.CheckedChanged += new System.EventHandler(this.fast_srch_rbtn_CheckedChanged);
+            // 
+            // class_id_col
+            // 
+            this.class_id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.class_id_col.HeaderText = "כיתה";
+            this.class_id_col.MinimumWidth = 50;
+            this.class_id_col.Name = "class_id_col";
+            this.class_id_col.Width = 58;
+            // 
+            // building_col
+            // 
+            this.building_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.building_col.HeaderText = "בניין";
+            this.building_col.Name = "building_col";
+            this.building_col.Width = 59;
+            // 
+            // floor_col
+            // 
+            this.floor_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.floor_col.HeaderText = "קומה";
+            this.floor_col.Name = "floor_col";
+            this.floor_col.Width = 58;
+            // 
+            // avail_time_col
+            // 
+            this.avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.avail_time_col.HeaderText = "זמינות";
+            this.avail_time_col.MinimumWidth = 80;
+            this.avail_time_col.Name = "avail_time_col";
+            this.avail_time_col.Width = 80;
+            // 
+            // total_avail_time_col
+            // 
+            this.total_avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.total_avail_time_col.HeaderText = "סה\"כ זמן";
+            this.total_avail_time_col.Name = "total_avail_time_col";
+            this.total_avail_time_col.Width = 78;
             // 
             // Form1
             // 
@@ -297,8 +342,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabs_window.ResumeLayout(false);
             this.srch_tab.ResumeLayout(false);
-            this.search_by_grbx.ResumeLayout(false);
-            this.search_by_grbx.PerformLayout();
+            this.srch_tab.PerformLayout();
+            this.filter_grbx.ResumeLayout(false);
+            this.filter_grbx.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.results_table)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -315,11 +361,6 @@
         private System.Windows.Forms.TabPage advanced_srch_tb;
         private System.Windows.Forms.DataGridView results_table;
         private System.Windows.Forms.Button search_btn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn class_id_col;
-        private System.Windows.Forms.DataGridViewTextBoxColumn building_col;
-        private System.Windows.Forms.DataGridViewTextBoxColumn floor_col;
-        private System.Windows.Forms.DataGridViewTextBoxColumn avail_time_col;
-        private System.Windows.Forms.DataGridViewTextBoxColumn total_avail_time_col;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
@@ -328,13 +369,20 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.GroupBox search_by_grbx;
+        private System.Windows.Forms.GroupBox filter_grbx;
         private System.Windows.Forms.ComboBox time_from_cmbx;
         private System.Windows.Forms.ComboBox day_cmbx;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox time_to_cmbx;
+        private System.Windows.Forms.RadioButton fast_srch_rbtn;
+        private System.Windows.Forms.RadioButton advanced_srch_rbtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn class_id_col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn building_col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn floor_col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn avail_time_col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn total_avail_time_col;
 
 
     }

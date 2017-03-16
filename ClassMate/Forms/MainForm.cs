@@ -37,6 +37,11 @@ namespace ClassMate
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            initFilterLists();
+        }
+
+        private void initFilterLists()
+        {
             first_cmbx_load_ = true;
             fillDaysList();
             fillTimeLists();
@@ -53,23 +58,23 @@ namespace ClassMate
                     day_cmbx.Items.Add(DataExtractor.intDayToString(i));
                 else
                 {
-                    day_cmbx.Items.Add("Today");
+                    day_cmbx.Items.Add("היום");
                     college_day = true;
                 }
             }
                
             if (college_day)
-                day_cmbx.SelectedIndex = day_cmbx.FindStringExact("Today");
+                day_cmbx.SelectedIndex = day_cmbx.FindStringExact("היום");
             else
-                day_cmbx.SelectedIndex = day_cmbx.FindStringExact("Sunday");
+                day_cmbx.SelectedIndex = day_cmbx.FindStringExact("ראשון");
         }
 
         private void fillTimeLists()
         {
             string now = DateTime.Now.ToString("HH:mm");
             Hour now_hour = new Hour(now);
-            time_from_cmbx.Items.Add(now + " (Now)");
-            time_to_cmbx.Items.Add("End Of Day");
+            time_from_cmbx.Items.Add(now + " (עכשיו)");
+            time_to_cmbx.Items.Add("סוף היום");
             for (int hour = now_hour.getHours() + 1; hour <= 23; hour++)
             {
                 for (int half_hour = 0; half_hour < 2; half_hour++)
@@ -95,11 +100,11 @@ namespace ClassMate
             if (!first_cmbx_load_)
             {
                 string from_time_selection = time_from_cmbx.SelectedItem.ToString();
-                if (from_time_selection.Contains("(Now)"))
-                    from_time_selection = from_time_selection.Replace("(Now)", "");
+                if (from_time_selection.Contains("(עכשיו)"))
+                    from_time_selection = from_time_selection.Replace("(עכשיו)", "");
                 Hour from_time_hour = new Hour(from_time_selection);
                 time_to_cmbx.Items.Clear();
-                time_to_cmbx.Items.Add("End Of Day");
+                time_to_cmbx.Items.Add("סוף היום");
                 for (int hour = from_time_hour.getHours() + 1; hour <= 23; hour++)
                 {
                     for (int half_hour = 0; half_hour < 2; half_hour++)
@@ -120,7 +125,7 @@ namespace ClassMate
         
         private void day_cmbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (day_cmbx.SelectedItem.ToString() != "Today" && !first_cmbx_load_)
+            if (day_cmbx.SelectedItem.ToString() != "היום" && !first_cmbx_load_)
             {
                 time_from_cmbx.Items.Clear();
                 time_to_cmbx.Items.Clear();
@@ -155,9 +160,17 @@ namespace ClassMate
             {
                 // do something with entry.Value or entry.Key
                 class_entry.Value.getHoursList().printList();
-                Hour free_time = class_entry.Value.getHoursList().getFreeTime(new Hour(12,0));
-                if (free_time != null) //IMPORTANT: if free time is null, means there free time until the end of the day
-                    Console.WriteLine("{0}:{1}", free_time.getHours(), free_time.getMinutes());
+                var free_time = class_entry.Value.getHoursList().getFreeTime(new Hour(12,0));
+                if (free_time != null) //TODO: IMPORTANT: if free time is null, means there free time until the end of the day
+                {
+                    Console.WriteLine("{0}  Total time: {1}", free_time.from_to.ToString(), free_time.total_time.ToString());
+                    //TODO: SEARCH USES CONST PARAMS INSTEAD OF GUI PARAMS
+                    results_table.Rows.Add(class_entry.Value.getID().ToString(), 
+                                           class_entry.Value.getBuilding().ToString(), 
+                                           class_entry.Value.getFloor().ToString(),
+                                           free_time.from_to.ToString(),
+                                           free_time.total_time.ToString());
+                }
             }
 
             /*
@@ -170,6 +183,25 @@ namespace ClassMate
             row.Cells[3].Value = 50.2;
             row.Cells[4].Value = "XYZ";
             results_table.Rows.Add(row);*/
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void advanced_srch_rbtn_CheckedChanged(object sender, EventArgs e)
+        {
+            filter_grbx.Enabled = true;
+        }
+
+        private void fast_srch_rbtn_CheckedChanged(object sender, EventArgs e)
+        {
+            filter_grbx.Enabled = false;
+            time_from_cmbx.Items.Clear();
+            time_to_cmbx.Items.Clear();
+            day_cmbx.Items.Clear();
+            initFilterLists();
         }
     }
 }
