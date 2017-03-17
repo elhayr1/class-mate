@@ -15,12 +15,16 @@ namespace ClassMate.Src
 {
     static class DataURLs
     {
-        public const string SUNDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=0,7&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F8%E0%F9%E5%EF&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=1&tod=1&cidfilter=030,050,010";
-        public const string MONDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=0,7&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%F0%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=2&tod=2&cidfilter=030,050,010";
-        public const string TUESDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=0,7&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%EC%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=3&tod=3&cidfilter=030,050,010";
-        public const string WEDNESDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=0,7&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F8%E1%E9%F2%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=4&tod=4&cidfilter=030,050,010";
-        public const string THURSDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=0,7&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%E7%EE%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=5&tod=5&cidfilter=030,050";
-        public const string FRIDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=0,7&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=6&tod=6&cidfilter=030,050";
+        //TODO: these URLs updates every semester. Support dynamic update from online server
+        //TODO: enable change of links throught settings screen
+        //TODO: add possibility to save extracted data in files for using offline
+
+        public const string SUNDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F8%E0%F9%E5%EF&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=1&tod=1&cidfilter=030,050,010";
+        public const string MONDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%F0%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=2&tod=2&cidfilter=030,050,010";
+        public const string TUESDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%EC%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=3&tod=3&cidfilter=030,050,010";
+        public const string WEDNESDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F8%E1%E9%F2%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=4&tod=4&cidfilter=030,050,010";
+        public const string THURSDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%E7%EE%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=5&tod=5&cidfilter=030,050";
+        public const string FRIDAY_URL = "http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=6&tod=6&cidfilter=030,050";
         public const string CLASSES_TAG = "//td";
         public const int FIRST_CLASS_INDEX = 5;
         public const int BETWEEN_CLASSES_OFFSET = 7;
@@ -33,7 +37,7 @@ namespace ClassMate.Src
         private Dictionary<string, ClassRoom> classes_hours_;
 
         private static DataExtractor instance = null;
-        // adding locking object
+        //adding locking object
         private static readonly object syncRoot = new object();
         private DataExtractor() 
         {
@@ -61,10 +65,12 @@ namespace ClassMate.Src
 
         public void loadDataFromHTML(string sapir_url)
         {
-            html_doc_ = web_obj_.Load(sapir_url);
-            var node = html_doc_.DocumentNode.SelectNodes(DataURLs.CLASSES_TAG);
-            int num_of_records = node.Count();
-            
+           html_doc_ = web_obj_.Load(sapir_url);
+           var node = html_doc_.DocumentNode.SelectNodes(DataURLs.CLASSES_TAG);
+           int num_of_records = node.Count();
+
+          // Console.Write(node[0].InnerText);
+
             string class_id = "";
             HourNode hours_window = null;
             HoursOrderedLinkedList temp_hours_linked_list = null;
@@ -73,11 +79,11 @@ namespace ClassMate.Src
                  i < num_of_records;
                  i += DataURLs.BETWEEN_CLASSES_OFFSET)
             {
-                hours_window = new HourNode(node[i].InnerText);
                 class_id = Regex.Match(node[i + 1].InnerText, @"\d+").Value;
                 //Sapir HTML is fucked up, so check if class name is legal first
                 if (class_id != "")
                 {
+                    hours_window = new HourNode(node[i].InnerText);
                     ClassRoom temp_class = new ClassRoom(class_id);
                     //test regex:
                     Console.Write(node[i + 1].InnerText + ": "); Console.WriteLine(class_id);
@@ -146,5 +152,49 @@ namespace ClassMate.Src
             }
             return "";
         }
+
+        public static int stringDayToInt(string day)
+        {
+            switch (day)
+            {
+                case "ראשון":
+                    return 0;
+                case "שני":
+                    return 1;
+                case "שלישי":
+                    return 2;
+                case "רביעי":
+                    return 3;
+                case "חמישי":
+                    return 4;
+                case "שישי":
+                    return 5;
+            }
+            return -1;
+        }
+
+        public static string getDayURL(string day)
+        {
+            switch (day)
+            {
+                case "ראשון":
+                    return DataURLs.SUNDAY_URL;
+                case "שני":
+                    return DataURLs.MONDAY_URL;
+                case "שלישי":
+                    return DataURLs.TUESDAY_URL;
+                case "רביעי":
+                    return DataURLs.WEDNESDAY_URL;
+                case "חמישי":
+                    return DataURLs.THURSDAY_URL;
+                case "שישי":
+                    return DataURLs.FRIDAY_URL;
+                case "היום":
+                    return getDayURL(intDayToString((int)DateTime.Now.DayOfWeek));
+            }
+            return "";
+        }
+
+
     }
 }

@@ -80,7 +80,7 @@ namespace ClassMate.Src
 
         public override string ToString() 
         {
-            return lower_hour.ToString() + " - " + upper_hour.ToString(); 
+            return upper_hour.ToString() + " - " + lower_hour.ToString(); 
         }  
 
     }

@@ -87,17 +87,29 @@ namespace ClassMate.Src
             {
  
                 //search time is between hour nodes
-                if  (search_time >= temp_iterator.upper_hour && search_time <= temp_iterator.next.lower_hour) 
-                    return new FreeTime(search_time, temp_iterator.next.lower_hour); 
+                if  (search_time >= temp_iterator.upper_hour && search_time <= temp_iterator.next.lower_hour)
+                    if (temp_iterator.next.lower_hour - search_time > new Hour(0, 0))
+                        return new FreeTime(search_time, temp_iterator.next.lower_hour); 
 
                 //search time is inside hour node range
                 else if (search_time >= temp_iterator.lower_hour && 
-                         search_time <= temp_iterator.upper_hour) 
-                    return new FreeTime(temp_iterator.upper_hour, temp_iterator.next.lower_hour);
+                         search_time <= temp_iterator.upper_hour)
+                    if (temp_iterator.next.lower_hour - temp_iterator.upper_hour > new Hour(0,0))
+                        return new FreeTime(temp_iterator.upper_hour, temp_iterator.next.lower_hour);
 
                 temp_iterator = temp_iterator.next;
             }
-            return null; //available until next day
+            if (tail_.upper_hour > search_time)
+            {
+                if (new Hour(24, 0) - tail_.upper_hour > new Hour(0, 0))
+                    return new FreeTime(tail_.upper_hour, new Hour(24, 0)); //available until end of day
+            }
+            else
+            {
+                if (new Hour(24, 0) - search_time > new Hour(0, 0))
+                    return new FreeTime(search_time, new Hour(24, 0)); //available until end of day
+            }
+            return null;
         }
 
         public void printList()

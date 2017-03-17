@@ -113,7 +113,8 @@ namespace ClassMate.Src
 
         public override string ToString()
         {
-            return getHours() + ":" + getMinutes();
+            string mins = getMinutes() < 10 ? getMinutes().ToString() + "0" : getMinutes().ToString();
+            return getHours() + ":" + mins;
         }
     }
 

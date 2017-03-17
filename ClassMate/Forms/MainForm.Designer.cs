@@ -39,6 +39,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.search_btn = new System.Windows.Forms.Button();
             this.results_table = new System.Windows.Forms.DataGridView();
+            this.class_id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.building_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.floor_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.advanced_srch_tb = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,13 +53,6 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.advanced_srch_rbtn = new System.Windows.Forms.RadioButton();
-            this.fast_srch_rbtn = new System.Windows.Forms.RadioButton();
-            this.class_id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.building_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.floor_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabs_window.SuspendLayout();
             this.srch_tab.SuspendLayout();
             this.filter_grbx.SuspendLayout();
@@ -76,8 +74,6 @@
             // 
             // srch_tab
             // 
-            this.srch_tab.Controls.Add(this.fast_srch_rbtn);
-            this.srch_tab.Controls.Add(this.advanced_srch_rbtn);
             this.srch_tab.Controls.Add(this.filter_grbx);
             this.srch_tab.Controls.Add(this.search_btn);
             this.srch_tab.Controls.Add(this.results_table);
@@ -98,7 +94,6 @@
             this.filter_grbx.Controls.Add(this.day_cmbx);
             this.filter_grbx.Controls.Add(this.label2);
             this.filter_grbx.Controls.Add(this.label1);
-            this.filter_grbx.Enabled = false;
             this.filter_grbx.Location = new System.Drawing.Point(22, 35);
             this.filter_grbx.Name = "filter_grbx";
             this.filter_grbx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -194,6 +189,48 @@
             this.results_table.TabIndex = 1;
             this.results_table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // class_id_col
+            // 
+            this.class_id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.class_id_col.HeaderText = "כיתה";
+            this.class_id_col.MinimumWidth = 50;
+            this.class_id_col.Name = "class_id_col";
+            this.class_id_col.ReadOnly = true;
+            this.class_id_col.Width = 58;
+            // 
+            // building_col
+            // 
+            this.building_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.building_col.HeaderText = "בניין";
+            this.building_col.Name = "building_col";
+            this.building_col.ReadOnly = true;
+            this.building_col.Width = 59;
+            // 
+            // floor_col
+            // 
+            this.floor_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.floor_col.HeaderText = "קומה";
+            this.floor_col.Name = "floor_col";
+            this.floor_col.ReadOnly = true;
+            this.floor_col.Width = 58;
+            // 
+            // avail_time_col
+            // 
+            this.avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.avail_time_col.HeaderText = "זמינות";
+            this.avail_time_col.MinimumWidth = 80;
+            this.avail_time_col.Name = "avail_time_col";
+            this.avail_time_col.ReadOnly = true;
+            this.avail_time_col.Width = 80;
+            // 
+            // total_avail_time_col
+            // 
+            this.total_avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.total_avail_time_col.HeaderText = "סה\"כ זמן";
+            this.total_avail_time_col.Name = "total_avail_time_col";
+            this.total_avail_time_col.ReadOnly = true;
+            this.total_avail_time_col.Width = 78;
+            // 
             // advanced_srch_tb
             // 
             this.advanced_srch_tb.Location = new System.Drawing.Point(4, 22);
@@ -268,67 +305,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(473, 421);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // advanced_srch_rbtn
-            // 
-            this.advanced_srch_rbtn.AutoSize = true;
-            this.advanced_srch_rbtn.Location = new System.Drawing.Point(230, 12);
-            this.advanced_srch_rbtn.Name = "advanced_srch_rbtn";
-            this.advanced_srch_rbtn.Size = new System.Drawing.Size(96, 17);
-            this.advanced_srch_rbtn.TabIndex = 4;
-            this.advanced_srch_rbtn.Text = "חיפוש מתקדם";
-            this.advanced_srch_rbtn.UseVisualStyleBackColor = true;
-            this.advanced_srch_rbtn.CheckedChanged += new System.EventHandler(this.advanced_srch_rbtn_CheckedChanged);
-            // 
-            // fast_srch_rbtn
-            // 
-            this.fast_srch_rbtn.AutoSize = true;
-            this.fast_srch_rbtn.Checked = true;
-            this.fast_srch_rbtn.Location = new System.Drawing.Point(346, 12);
-            this.fast_srch_rbtn.Name = "fast_srch_rbtn";
-            this.fast_srch_rbtn.Size = new System.Drawing.Size(86, 17);
-            this.fast_srch_rbtn.TabIndex = 5;
-            this.fast_srch_rbtn.TabStop = true;
-            this.fast_srch_rbtn.Text = "חיפוש מהיר";
-            this.fast_srch_rbtn.UseVisualStyleBackColor = true;
-            this.fast_srch_rbtn.CheckedChanged += new System.EventHandler(this.fast_srch_rbtn_CheckedChanged);
-            // 
-            // class_id_col
-            // 
-            this.class_id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.class_id_col.HeaderText = "כיתה";
-            this.class_id_col.MinimumWidth = 50;
-            this.class_id_col.Name = "class_id_col";
-            this.class_id_col.Width = 58;
-            // 
-            // building_col
-            // 
-            this.building_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.building_col.HeaderText = "בניין";
-            this.building_col.Name = "building_col";
-            this.building_col.Width = 59;
-            // 
-            // floor_col
-            // 
-            this.floor_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.floor_col.HeaderText = "קומה";
-            this.floor_col.Name = "floor_col";
-            this.floor_col.Width = 58;
-            // 
-            // avail_time_col
-            // 
-            this.avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.avail_time_col.HeaderText = "זמינות";
-            this.avail_time_col.MinimumWidth = 80;
-            this.avail_time_col.Name = "avail_time_col";
-            this.avail_time_col.Width = 80;
-            // 
-            // total_avail_time_col
-            // 
-            this.total_avail_time_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.total_avail_time_col.HeaderText = "סה\"כ זמן";
-            this.total_avail_time_col.Name = "total_avail_time_col";
-            this.total_avail_time_col.Width = 78;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,7 +318,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabs_window.ResumeLayout(false);
             this.srch_tab.ResumeLayout(false);
-            this.srch_tab.PerformLayout();
             this.filter_grbx.ResumeLayout(false);
             this.filter_grbx.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.results_table)).EndInit();
@@ -376,8 +351,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox time_to_cmbx;
-        private System.Windows.Forms.RadioButton fast_srch_rbtn;
-        private System.Windows.Forms.RadioButton advanced_srch_rbtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn class_id_col;
         private System.Windows.Forms.DataGridViewTextBoxColumn building_col;
         private System.Windows.Forms.DataGridViewTextBoxColumn floor_col;

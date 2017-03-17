@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassMate.Src;
 
+
 namespace ClassMate
 {
     public partial class Form1 : Form
     {
         bool first_cmbx_load_;
-
+        
         public Form1()
         {
             InitializeComponent();
+            results_table.AutoGenerateColumns = false;
+          
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -100,9 +103,9 @@ namespace ClassMate
             if (!first_cmbx_load_)
             {
                 string from_time_selection = time_from_cmbx.SelectedItem.ToString();
-                if (from_time_selection.Contains("(עכשיו)"))
-                    from_time_selection = from_time_selection.Replace("(עכשיו)", "");
-                Hour from_time_hour = new Hour(from_time_selection);
+               /* if (from_time_selection.Contains("(עכשיו)"))
+                    from_time_selection = from_time_selection.Replace("(עכשיו)", "");*/
+                Hour from_time_hour = new Hour(from_time_selection.Replace("(עכשיו)", ""));//new Hour(from_time_selection);
                 time_to_cmbx.Items.Clear();
                 time_to_cmbx.Items.Add("סוף היום");
                 for (int hour = from_time_hour.getHours() + 1; hour <= 23; hour++)
@@ -151,39 +154,39 @@ namespace ClassMate
                 time_to_cmbx.SelectedIndex = 0;
             }
         }
-
+        //TODO: ADD EXPORT HOURS TO FILE CAPABILITY
         private void search_btn_Click(object sender, EventArgs e)
         {
-            DataExtractor.Instance.loadDataFromHTML(DataURLs.SUNDAY_URL);
+            //var classes_bind_lst = new BindingList<ClassRoom>();
+            //results_table.DataSource = classes_bind_lst;
+            results_table.Rows.Clear();
+
+            DataExtractor.Instance.loadDataFromHTML(DataExtractor.getDayURL(day_cmbx.SelectedItem.ToString()));
             Dictionary<string, ClassRoom> classes_hours_ = DataExtractor.Instance.getClassesHours();
+
+            string from_time_selection = time_from_cmbx.SelectedItem.ToString();
+            Hour from_time_hour = new Hour(from_time_selection.Replace("(עכשיו)", ""));
+
             foreach (KeyValuePair<string, ClassRoom> class_entry in classes_hours_)
             {
-                // do something with entry.Value or entry.Key
+                Console.Write("Class {0}: ", class_entry.Value.getID().ToString());
                 class_entry.Value.getHoursList().printList();
-                var free_time = class_entry.Value.getHoursList().getFreeTime(new Hour(12,0));
-                if (free_time != null) //TODO: IMPORTANT: if free time is null, means there free time until the end of the day
+
+                //TODO: build another getfreetime that need to also get end time, not just start time (if user chose hour other than "end of day")
+                var free_time = class_entry.Value.getHoursList().getFreeTime(from_time_hour);
+
+                if (free_time != null)
                 {
                     Console.WriteLine("{0}  Total time: {1}", free_time.from_to.ToString(), free_time.total_time.ToString());
-                    //TODO: SEARCH USES CONST PARAMS INSTEAD OF GUI PARAMS
-                    results_table.Rows.Add(class_entry.Value.getID().ToString(), 
-                                           class_entry.Value.getBuilding().ToString(), 
-                                           class_entry.Value.getFloor().ToString(),
-                                           free_time.from_to.ToString(),
-                                           free_time.total_time.ToString());
+                    results_table.Rows.Add(class_entry.Value.getID(),
+                                            class_entry.Value.getBuilding(),
+                                            class_entry.Value.getFloor(),
+                                            free_time.from_to,
+                                            free_time.total_time);
                 }
             }
-
-            /*
-            ClassRoom classroom = DataExtractor.Instance.getClassRoom("9001");
-            //class_hours.getHoursList().printList();
-            DataGridViewRow row = (DataGridViewRow)results_table.Rows[0].Clone();
-            row.Cells[0].Value = classroom.getID().ToString();
-            row.Cells[1].Value = classroom.getBuilding().ToString();
-            row.Cells[2].Value = classroom.getFloor().ToString();
-            row.Cells[3].Value = 50.2;
-            row.Cells[4].Value = "XYZ";
-            results_table.Rows.Add(row);*/
         }
+
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
