@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassMate.Src
+namespace ClassMate.Parsers
 {
     /*********************************************************************************
      * This class holds hours linked list, and keep it 
      * ordered after each insersion. Output example:
      * [8:30 - 11:0] => [12:30 - 13:15] => [13:30 - 16:0] => [16:15 - 17:45] => [NULL]
      ********************************************************************************/
+
+    //todo: on top of each class - document and draw illustration of data
 
     class HoursOrderedLinkedList
     {
@@ -22,27 +24,30 @@ namespace ClassMate.Src
             head_ = tail_= null;
         }
 
-        public void add(HourNode new_hour_node)
+        public void add(HourNode new_node)
         {
-            
+            //TODO: prevent adding same hours node (sapir fucked up html...) - compare to each node while finding place to insert new node
             if (size_ == 0)
-                head_ = tail_ = new_hour_node;
+                head_ = tail_ = new_node;
             else
             {
                 HourNode temp_iterator = head_;
 
                 while (temp_iterator.next != null &&
-                       new_hour_node > temp_iterator)
+                       new_node > temp_iterator)
                 {
+                   
                     temp_iterator = temp_iterator.next;
+                   //if (new_node == temp_iterator) //node already exist, stop 
+                  //     return;
                 }
 
                 if (temp_iterator.next == null)
                 {
-                    if (new_hour_node < temp_iterator)
-                        addBefore(new_hour_node, temp_iterator);
+                    if (new_node < temp_iterator)
+                        addBefore(new_node, temp_iterator);
                     else
-                        addToTail(new_hour_node);
+                        addToTail(new_node);
                 }
             }
             size_++;
@@ -77,39 +82,42 @@ namespace ClassMate.Src
 
         public int size() { return size_; }
 
-        public FreeTime getFreeTime(Hour search_time)
+        public FreeTime getFreeTime(Hour from_time)
         {
-            if (search_time < head_.lower_hour)
-                return new FreeTime(search_time, head_.lower_hour);
+            if (from_time < head_.lower_hour)
+                return new FreeTime(from_time, head_.lower_hour);
 
             HourNode temp_iterator = head_;
             while (temp_iterator.next != null)
             {
- 
                 //search time is between hour nodes
-                if  (search_time >= temp_iterator.upper_hour && search_time <= temp_iterator.next.lower_hour)
-                    if (temp_iterator.next.lower_hour - search_time > new Hour(0, 0))
-                        return new FreeTime(search_time, temp_iterator.next.lower_hour); 
-
+                if  (from_time >= temp_iterator.upper_hour && 
+                     from_time <= temp_iterator.next.lower_hour)
+                {
+                    if (temp_iterator.next.lower_hour - from_time > new Hour(0, 0))
+                        return new FreeTime(from_time, temp_iterator.next.lower_hour); 
+                }
                 //search time is inside hour node range
-                else if (search_time >= temp_iterator.lower_hour && 
-                         search_time <= temp_iterator.upper_hour)
-                    if (temp_iterator.next.lower_hour - temp_iterator.upper_hour > new Hour(0,0))
+                else if (from_time >= temp_iterator.lower_hour && 
+                         from_time <= temp_iterator.upper_hour)
+                {
+                    if (temp_iterator.next.lower_hour - temp_iterator.upper_hour > new Hour(0, 0))
                         return new FreeTime(temp_iterator.upper_hour, temp_iterator.next.lower_hour);
-
+                }
                 temp_iterator = temp_iterator.next;
             }
-            if (tail_.upper_hour > search_time)
+
+            if (tail_.upper_hour > from_time)
             {
                 if (new Hour(24, 0) - tail_.upper_hour > new Hour(0, 0))
                     return new FreeTime(tail_.upper_hour, new Hour(24, 0)); //available until end of day
             }
             else
             {
-                if (new Hour(24, 0) - search_time > new Hour(0, 0))
-                    return new FreeTime(search_time, new Hour(24, 0)); //available until end of day
+                if (new Hour(24, 0) - from_time > new Hour(0, 0))
+                    return new FreeTime(from_time, new Hour(24, 0)); //available until end of day
             }
-            return null;
+            return null; //no avail time found
         }
 
         public void printList()

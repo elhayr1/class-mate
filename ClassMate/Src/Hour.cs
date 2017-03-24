@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassMate.Src
+namespace ClassMate.Parsers
 {
     class Hour
     {
@@ -115,6 +115,11 @@ namespace ClassMate.Src
         {
             string mins = getMinutes() < 10 ? getMinutes().ToString() + "0" : getMinutes().ToString();
             return getHours() + ":" + mins;
+        }
+
+        public static Hour now() 
+        {
+            return new Hour(DateTime.Now.ToString("HH:mm"));
         }
     }
 

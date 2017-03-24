@@ -8,22 +8,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClassMate.Properties
-{
-
-
+namespace ClassMate.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F8%E0%F9%E5%EF&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=1&tod=1&cidfilter=030,050,010")]
+        public string sunday_url {
+            get {
+                return ((string)(this["sunday_url"]));
+            }
+            set {
+                this["sunday_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%F0%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=2&tod=2&cidfilter=030,050,010")]
+        public string monday_url {
+            get {
+                return ((string)(this["monday_url"]));
+            }
+            set {
+                this["monday_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%EC%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=3&tod=3&cidfilter=030,050,010")]
+        public string tuesday_url {
+            get {
+                return ((string)(this["tuesday_url"]));
+            }
+            set {
+                this["tuesday_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F8%E1%E9%F2%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=4&tod=4&cidfilter=030,050,010")]
+        public string wednesday_url {
+            get {
+                return ((string)(this["wednesday_url"]));
+            }
+            set {
+                this["wednesday_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%E7%EE%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=5&tod=5&cidfilter=030,050")]
+        public string thursday_url {
+            get {
+                return ((string)(this["thursday_url"]));
+            }
+            set {
+                this["thursday_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://events.sapir.ac.il/asplinks/newlist.asp?co=3,5,73,69,7,75,74&cok=,,,&teax=16&sm=1,8&titles=&mtit=%F9%E9%E1%E5%F5%20%EC%E9%E5%ED%20%F9%E9%F9%E9&fher=Arial&ftet=Arial&ftit=Arial&cher=ff6820&ctit=00008b&ctet=00008b&bher=1&btit=0&btet=0&bgch=e6e6fa&bgctit=e6e6fa&bgctet=e6e6fa&sitit=28&siher=24&sitet=16&bgc=e6e6fa&isHdr=1&bgi=&spd=1&sTime=0&cidd=12%26%239001%3B=1&Facu=0&db_num=2007%20&sf=0&st=19999&fromd=6&tod=6&cidfilter=030,050")]
+        public string friday_url {
+            get {
+                return ((string)(this["friday_url"]));
+            }
+            set {
+                this["friday_url"] = value;
             }
         }
     }

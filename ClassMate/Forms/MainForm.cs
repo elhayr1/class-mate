@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ClassMate.Src;
+using ClassMate.Parsers;
+using ClassMate.Forms;
 
 
 namespace ClassMate
 {
     public partial class Form1 : Form
     {
-        bool first_cmbx_load_;
+        bool lock_triggers_;
         
         public Form1()
         {
             InitializeComponent();
+            this.CenterToScreen();
             results_table.AutoGenerateColumns = false;
           
         }
@@ -45,10 +47,11 @@ namespace ClassMate
 
         private void initFilterLists()
         {
-            first_cmbx_load_ = true;
+            lock_triggers_ = true;
             fillDaysList();
-            fillTimeLists();
-            first_cmbx_load_ = false;
+            fillFromTimeList();
+ 
+            lock_triggers_ = false;
         }
 
         private void fillDaysList()
@@ -58,7 +61,7 @@ namespace ClassMate
             for (int i=0; i<=5; i++)
             {
                 if (today != i)
-                    day_cmbx.Items.Add(DataExtractor.intDayToString(i));
+                    day_cmbx.Items.Add(SapirParser.intDayToString(i));
                 else
                 {
                     day_cmbx.Items.Add("היום");
@@ -72,107 +75,57 @@ namespace ClassMate
                 day_cmbx.SelectedIndex = day_cmbx.FindStringExact("ראשון");
         }
 
-        private void fillTimeLists()
+        private void fillFromTimeList()
         {
-            string now = DateTime.Now.ToString("HH:mm");
-            Hour now_hour = new Hour(now);
-            time_from_cmbx.Items.Add(now + " (עכשיו)");
-            time_to_cmbx.Items.Add("סוף היום");
-            for (int hour = now_hour.getHours() + 1; hour <= 23; hour++)
+            time_cmbx.Items.Clear();
+            Hour now_hour = Hour.now() >= new Hour(7, 0) ? Hour.now() : new Hour(7, 0);
+            if (day_cmbx.SelectedItem.ToString() == "היום" && Hour.now() >= new Hour(7, 0))
+                time_cmbx.Items.Add(now_hour + " (עכשיו)");
+
+            for (int hour = now_hour.getHours(); hour <= 23; hour++)
             {
-                for (int half_hour = 0; half_hour < 2; half_hour++)
-                {
-                    if (half_hour == 0)
-                    {
-                        time_from_cmbx.Items.Add(hour + ":00");
-                        time_to_cmbx.Items.Add(hour + ":00");
-                    }
-                    else
-                    {
-                        time_from_cmbx.Items.Add(hour + ":30");
-                        time_to_cmbx.Items.Add(hour + ":30");
-                    }
-                }
+                time_cmbx.Items.Add(hour + ":00");
+                time_cmbx.Items.Add(hour + ":30");
             }
-            time_from_cmbx.SelectedIndex = 0;
-            time_to_cmbx.SelectedIndex = 0;
+            time_cmbx.SelectedIndex = 0;
         }
 
         private void time_from_cmbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!first_cmbx_load_)
+            if (!lock_triggers_)
             {
-                string from_time_selection = time_from_cmbx.SelectedItem.ToString();
-               /* if (from_time_selection.Contains("(עכשיו)"))
-                    from_time_selection = from_time_selection.Replace("(עכשיו)", "");*/
-                Hour from_time_hour = new Hour(from_time_selection.Replace("(עכשיו)", ""));//new Hour(from_time_selection);
-                time_to_cmbx.Items.Clear();
-                time_to_cmbx.Items.Add("סוף היום");
-                for (int hour = from_time_hour.getHours() + 1; hour <= 23; hour++)
-                {
-                    for (int half_hour = 0; half_hour < 2; half_hour++)
-                    {
-                        if (half_hour == 0)
-                        {
-                            time_to_cmbx.Items.Add(hour + ":00");
-                        }
-                        else
-                        {
-                            time_to_cmbx.Items.Add(hour + ":30");
-                        }
-                    }
-                }
-                time_to_cmbx.SelectedIndex = 0;
+                lock_triggers_ = true;
+                lock_triggers_ = false;
             }
         }
         
         private void day_cmbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (day_cmbx.SelectedItem.ToString() != "היום" && !first_cmbx_load_)
+            if (!lock_triggers_)
             {
-                time_from_cmbx.Items.Clear();
-                time_to_cmbx.Items.Clear();
-                for (int hour = 7; hour <= 23; hour++)
-                {
-                    for (int half_hour = 0; half_hour < 2; half_hour++)
-                    {
-                        if (half_hour == 0)
-                        {
-                            time_from_cmbx.Items.Add(hour + ":00");
-                            if (hour > 7)
-                                time_to_cmbx.Items.Add(hour + ":00");
-                        }
-                        else
-                        {
-                            time_from_cmbx.Items.Add(hour + ":30");
-                            if (hour > 7)
-                                time_to_cmbx.Items.Add(hour + ":30");
-                        }
-                    }
-                }
-                time_from_cmbx.SelectedIndex = 0;
-                time_to_cmbx.SelectedIndex = 0;
+               lock_triggers_ = true;
+               fillFromTimeList();
+               time_cmbx.SelectedIndex = 0;
+               lock_triggers_ = false;
             }
         }
+
         //TODO: ADD EXPORT HOURS TO FILE CAPABILITY
         private void search_btn_Click(object sender, EventArgs e)
         {
-            //var classes_bind_lst = new BindingList<ClassRoom>();
-            //results_table.DataSource = classes_bind_lst;
+            //TODO: disable button while doing work
             results_table.Rows.Clear();
 
-            DataExtractor.Instance.loadDataFromHTML(DataExtractor.getDayURL(day_cmbx.SelectedItem.ToString()));
-            Dictionary<string, ClassRoom> classes_hours_ = DataExtractor.Instance.getClassesHours();
+            SapirParser.Instance.loadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
+            Dictionary<string, ClassRoom> classes_hours_ = SapirParser.Instance.getClassesHours();
 
-            string from_time_selection = time_from_cmbx.SelectedItem.ToString();
-            Hour from_time_hour = new Hour(from_time_selection.Replace("(עכשיו)", ""));
-
+            string time_selection = time_cmbx.SelectedItem.ToString();
+            Hour from_time_hour = new Hour(time_selection.Replace("(עכשיו)", ""));
             foreach (KeyValuePair<string, ClassRoom> class_entry in classes_hours_)
             {
                 Console.Write("Class {0}: ", class_entry.Value.getID().ToString());
                 class_entry.Value.getHoursList().printList();
 
-                //TODO: build another getfreetime that need to also get end time, not just start time (if user chose hour other than "end of day")
                 var free_time = class_entry.Value.getHoursList().getFreeTime(from_time_hour);
 
                 if (free_time != null)
@@ -195,16 +148,27 @@ namespace ClassMate
 
         private void advanced_srch_rbtn_CheckedChanged(object sender, EventArgs e)
         {
-            filter_grbx.Enabled = true;
+
         }
 
         private void fast_srch_rbtn_CheckedChanged(object sender, EventArgs e)
         {
             filter_grbx.Enabled = false;
-            time_from_cmbx.Items.Clear();
-            time_to_cmbx.Items.Clear();
+            time_cmbx.Items.Clear();
             day_cmbx.Items.Clear();
             initFilterLists();
+        }
+
+        private void settings_btn_Click(object sender, EventArgs e)
+        {
+            var settings_form = new SettingsForm();
+            settings_form.Show();
+        }
+
+        private void about_btn_Click(object sender, EventArgs e)
+        {
+            var about_form = new AboutForm();
+            about_form.Show();
         }
     }
 }

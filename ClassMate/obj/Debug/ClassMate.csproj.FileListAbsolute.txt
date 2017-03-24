@@ -44,3 +44,5 @@ E:\workspace\classmate_winform\ClassMate\obj\Debug\ClassMate.csprojResolveAssemb
 E:\workspace\classmate_winform\ClassMate\obj\Debug\ClassMate.Form1.resources
 E:\workspace\classmate_winform\ClassMate\obj\Debug\ClassMate.Properties.Resources.resources
 E:\workspace\classmate_winform\ClassMate\obj\Debug\ClassMate.csproj.GenerateResource.Cache
+E:\workspace\classmate_winform\ClassMate\obj\Debug\ClassMate.Forms.AboutForm.resources
+E:\workspace\classmate_winform\ClassMate\obj\Debug\ClassMate.Forms.SettingsForm.resources

@@ -10,10 +10,11 @@ using System.Xml;
 using System.Xml.XPath;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
-namespace ClassMate.Src
+namespace ClassMate.Parsers
 {
-    static class DataURLs
+    class SapirParser : Parser
     {
         //TODO: these URLs updates every semester. Support dynamic update from online server
         //TODO: enable change of links throught settings screen
@@ -28,24 +29,21 @@ namespace ClassMate.Src
         public const string CLASSES_TAG = "//td";
         public const int FIRST_CLASS_INDEX = 5;
         public const int BETWEEN_CLASSES_OFFSET = 7;
-    }
 
-    class DataExtractor
-    {
         private HtmlWeb web_obj_;
-        private HtmlDocument html_doc_;
+        private HtmlAgilityPack.HtmlDocument html_doc_;
         private Dictionary<string, ClassRoom> classes_hours_;
 
-        private static DataExtractor instance = null;
+        private static SapirParser instance = null;
         //adding locking object
         private static readonly object syncRoot = new object();
-        private DataExtractor() 
+        private SapirParser() 
         {
             web_obj_ = new HtmlWeb();
             classes_hours_ = new Dictionary<string, ClassRoom>();
         }
 
-        public static DataExtractor Instance
+        public static SapirParser Instance
         {
             get
             {
@@ -55,7 +53,7 @@ namespace ClassMate.Src
                     {
                         if (instance == null)
                         {
-                            instance = new DataExtractor();
+                            instance = new SapirParser();
                         }
                     }
                 }
@@ -63,10 +61,23 @@ namespace ClassMate.Src
             }
         }
 
-        public void loadDataFromHTML(string sapir_url)
+        public void loadDataFromHTML(string url)
         {
-           html_doc_ = web_obj_.Load(sapir_url);
-           var node = html_doc_.DocumentNode.SelectNodes(DataURLs.CLASSES_TAG);
+            try
+            {
+                html_doc_ = web_obj_.Load(url);
+                
+            }
+            catch (System.Net.WebException)
+            {
+                MessageBox.Show(null,
+                                "Couldn't connect to Sapir. Please check your internet connection and try again",
+                                "Connection Error",
+                                MessageBoxButtons.OK, 
+                                MessageBoxIcon.Error);
+                return;
+            }
+           var node = html_doc_.DocumentNode.SelectNodes(CLASSES_TAG);
            int num_of_records = node.Count();
 
           // Console.Write(node[0].InnerText);
@@ -75,9 +86,9 @@ namespace ClassMate.Src
             HourNode hours_window = null;
             HoursOrderedLinkedList temp_hours_linked_list = null;
 
-            for (int i = DataURLs.FIRST_CLASS_INDEX;
+            for (int i = FIRST_CLASS_INDEX;
                  i < num_of_records;
-                 i += DataURLs.BETWEEN_CLASSES_OFFSET)
+                 i += BETWEEN_CLASSES_OFFSET)
             {
                 class_id = Regex.Match(node[i + 1].InnerText, @"\d+").Value;
                 //Sapir HTML is fucked up, so check if class name is legal first
@@ -109,10 +120,7 @@ namespace ClassMate.Src
             }
         }
 
-        public void loadDataFromFile()
-        {
-
-        }
+       
 
         public void loadDataToFile()
         {
@@ -178,17 +186,17 @@ namespace ClassMate.Src
             switch (day)
             {
                 case "ראשון":
-                    return DataURLs.SUNDAY_URL;
+                    return SUNDAY_URL;
                 case "שני":
-                    return DataURLs.MONDAY_URL;
+                    return MONDAY_URL;
                 case "שלישי":
-                    return DataURLs.TUESDAY_URL;
+                    return TUESDAY_URL;
                 case "רביעי":
-                    return DataURLs.WEDNESDAY_URL;
+                    return WEDNESDAY_URL;
                 case "חמישי":
-                    return DataURLs.THURSDAY_URL;
+                    return THURSDAY_URL;
                 case "שישי":
-                    return DataURLs.FRIDAY_URL;
+                    return FRIDAY_URL;
                 case "היום":
                     return getDayURL(intDayToString((int)DateTime.Now.DayOfWeek));
             }
