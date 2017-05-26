@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassMate.Parsers;
 using ClassMate.Forms;
+using System.Runtime.InteropServices;
 
 
 namespace ClassMate
 {
     public partial class Form1 : Form
     {
+        SettingsForm settings_form_;
+        AboutForm about_form_;
         bool lock_triggers_;
         
         public Form1()
@@ -78,9 +81,13 @@ namespace ClassMate
         private void fillFromTimeList()
         {
             time_cmbx.Items.Clear();
-            Hour now_hour = Hour.now() >= new Hour(7, 0) ? Hour.now() : new Hour(7, 0);
+            Hour now_hour = now_hour = new Hour(7, 0);
             if (day_cmbx.SelectedItem.ToString() == "היום" && Hour.now() >= new Hour(7, 0))
+            {
+                now_hour = Hour.now() >= new Hour(7, 0) ? Hour.now() : new Hour(7, 0);
                 time_cmbx.Items.Add(now_hour + " (עכשיו)");
+            }
+                
 
             for (int hour = now_hour.getHours(); hour <= 23; hour++)
             {
@@ -114,14 +121,18 @@ namespace ClassMate
         private void search_btn_Click(object sender, EventArgs e)
         {
             //TODO: disable button while doing work
+            //TODO: try decrease amount of memo this exe takes from RAM. now it takes about 12MB
+            search_btn.Enabled = false;
             results_table.Rows.Clear();
-
-            SapirParser.Instance.loadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
-            Dictionary<string, ClassRoom> classes_hours_ = SapirParser.Instance.getClassesHours();
+            SapirParser parser = new SapirParser();
+            //SapirParser.Instance.loadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
+            //Dictionary<string, ClassRoom> classes_hours_ = SapirParser.Instance.getClassesHours();
+            parser.loadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
+            var classes_hours = parser.getClassesHours();
 
             string time_selection = time_cmbx.SelectedItem.ToString();
             Hour from_time_hour = new Hour(time_selection.Replace("(עכשיו)", ""));
-            foreach (KeyValuePair<string, ClassRoom> class_entry in classes_hours_)
+            foreach (KeyValuePair<string, ClassRoom> class_entry in classes_hours)
             {
                 Console.Write("Class {0}: ", class_entry.Value.getID().ToString());
                 class_entry.Value.getHoursList().printList();
@@ -131,13 +142,15 @@ namespace ClassMate
                 if (free_time != null)
                 {
                     Console.WriteLine("{0}  Total time: {1}", free_time.from_to.ToString(), free_time.total_time.ToString());
-                    results_table.Rows.Add(class_entry.Value.getID(),
-                                            class_entry.Value.getBuilding(),
-                                            class_entry.Value.getFloor(),
-                                            free_time.from_to,
-                                            free_time.total_time);
+                    if (free_time.total_time > new Hour(0,0))
+                        results_table.Rows.Add(class_entry.Value.getID(),
+                                                class_entry.Value.getBuilding(),
+                                                class_entry.Value.getFloor(),
+                                                free_time.from_to.ToHebString(),
+                                                free_time.total_time);
                 }
             }
+            search_btn.Enabled = true;
         }
 
 
@@ -161,14 +174,47 @@ namespace ClassMate
 
         private void settings_btn_Click(object sender, EventArgs e)
         {
-            var settings_form = new SettingsForm();
-            settings_form.Show();
+            if (settings_form_ == null)
+            {
+                settings_form_ = new SettingsForm();
+                settings_form_.Show();
+            }
         }
 
         private void about_btn_Click(object sender, EventArgs e)
         {
-            var about_form = new AboutForm();
-            about_form.Show();
+            if (about_form_ == null)
+            {
+                about_form_ = new AboutForm();
+                about_form_.Show();
+            }
+            about_form_.Restore();
+            about_form_.Focus();
+        }
+
+        private void test_btn_Click(object sender, EventArgs e)
+        {
+            Hour h = new Hour(10, 30) - new Hour(10, 27);
+        }
+    }
+}
+
+//extension for restoring minimized form to noraml state
+namespace System.Windows.Forms
+{
+    public static class Extensions
+    {
+        [DllImport( "user32.dll" )]
+        private static extern int ShowWindow( IntPtr hWnd, uint Msg );
+
+        private const uint SW_RESTORE = 0x09;
+
+        public static void Restore( this Form form )
+        {
+            if (form.WindowState == FormWindowState.Minimized)
+            {
+                ShowWindow(form.Handle, SW_RESTORE);
+            }
         }
     }
 }

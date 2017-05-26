@@ -63,7 +63,8 @@ namespace ClassMate.Parsers
                 lower_hour.getMinutes())
                 mins_delta = higher_hour.getMinutes() -
                                 lower_hour.getMinutes();
-            if (higher_hour.getMinutes() <
+
+            else if (higher_hour.getMinutes() <
               lower_hour.getMinutes())
             {
                 hour_delta--;
@@ -75,45 +76,40 @@ namespace ClassMate.Parsers
 
         public static bool operator <(Hour hour1, Hour hour2)
         {
-            if (hour1.getHours() == hour2.getHours() &&
-                hour1.getMinutes() == hour2.getMinutes())
-                return false;
-
-            if (hour1.getHours() > hour2.getHours())
-                return false;
-
             if (hour1.getHours() < hour2.getHours())
                 return true;
 
-            if (hour1.getMinutes() < hour2.getMinutes()) //hour1.getHour() == hour2.getHour()
+            if (hour1.getHours() == hour2.getHours() &&
+                hour1.getMinutes() < hour2.getMinutes()) 
                 return true;
+
             return false;
         }
 
         public static bool operator >(Hour hour1, Hour hour2)
         {
-            if (!(hour1 == hour2) && !(hour1 < hour2))
+            if ((!hour1.Equals(hour2)) && !(hour1 < hour2))
                 return true;
             return false;
         }
 
         public static bool operator >=(Hour hour1, Hour hour2)
         {
-            if ((hour1 == hour2) || (hour1 > hour2))
+            if ((hour1.Equals(hour2)) || (hour1 > hour2))
                 return true;
             return false;
         }
 
         public static bool operator <=(Hour hour1, Hour hour2)
         {
-            if ((hour1 == hour2) || (hour1 < hour2))
+            if ((hour1.Equals(hour2)) || (hour1 < hour2))
                 return true;
             return false;
         }
 
         public override string ToString()
         {
-            string mins = getMinutes() < 10 ? getMinutes().ToString() + "0" : getMinutes().ToString();
+            string mins = getMinutes() < 10 ? "0" + getMinutes().ToString() : getMinutes().ToString();
             return getHours() + ":" + mins;
         }
 

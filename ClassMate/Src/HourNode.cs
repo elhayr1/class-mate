@@ -78,10 +78,16 @@ namespace ClassMate.Parsers
             return false;
         }
 
+        public string ToHebString()
+        {
+            return upper_hour.ToString() + " - " + lower_hour.ToString();
+        }  
+
         public override string ToString() 
         {
-            return upper_hour.ToString() + " - " + lower_hour.ToString(); 
-        }  
+            return lower_hour.ToString() + " - " + upper_hour.ToString(); 
+        }
+
 
     }
 }

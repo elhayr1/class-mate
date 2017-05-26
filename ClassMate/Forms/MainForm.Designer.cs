@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.filter_grbx = new System.Windows.Forms.GroupBox();
+            this.test_btn = new System.Windows.Forms.Button();
             this.time_cmbx = new System.Windows.Forms.ComboBox();
             this.day_cmbx = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,9 +44,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.export_btn = new System.Windows.Forms.ToolStripMenuItem();
-            this.excelFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.print_btn = new System.Windows.Forms.ToolStripMenuItem();
-            this.preferences_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.settings_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.about_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -57,6 +55,7 @@
             // 
             // filter_grbx
             // 
+            this.filter_grbx.Controls.Add(this.test_btn);
             this.filter_grbx.Controls.Add(this.time_cmbx);
             this.filter_grbx.Controls.Add(this.day_cmbx);
             this.filter_grbx.Controls.Add(this.label2);
@@ -69,11 +68,21 @@
             this.filter_grbx.TabStop = false;
             this.filter_grbx.Text = "סנן";
             // 
-            // time_from_cmbx
+            // test_btn
+            // 
+            this.test_btn.Location = new System.Drawing.Point(15, 19);
+            this.test_btn.Name = "test_btn";
+            this.test_btn.Size = new System.Drawing.Size(75, 23);
+            this.test_btn.TabIndex = 5;
+            this.test_btn.Text = "test";
+            this.test_btn.UseVisualStyleBackColor = true;
+            this.test_btn.Click += new System.EventHandler(this.test_btn_Click);
+            // 
+            // time_cmbx
             // 
             this.time_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.time_cmbx.Location = new System.Drawing.Point(152, 40);
-            this.time_cmbx.Name = "time_from_cmbx";
+            this.time_cmbx.Name = "time_cmbx";
             this.time_cmbx.Size = new System.Drawing.Size(101, 21);
             this.time_cmbx.TabIndex = 3;
             this.time_cmbx.SelectedIndexChanged += new System.EventHandler(this.time_from_cmbx_SelectedIndexChanged);
@@ -197,8 +206,6 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.export_btn,
-            this.print_btn,
-            this.preferences_btn,
             this.settings_btn});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -207,34 +214,14 @@
             // 
             // export_btn
             // 
-            this.export_btn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.excelFileToolStripMenuItem});
             this.export_btn.Name = "export_btn";
-            this.export_btn.Size = new System.Drawing.Size(115, 22);
-            this.export_btn.Text = "יצא...";
-            // 
-            // excelFileToolStripMenuItem
-            // 
-            this.excelFileToolStripMenuItem.Name = "excelFileToolStripMenuItem";
-            this.excelFileToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.excelFileToolStripMenuItem.Text = "Excel File";
-            // 
-            // print_btn
-            // 
-            this.print_btn.Name = "print_btn";
-            this.print_btn.Size = new System.Drawing.Size(115, 22);
-            this.print_btn.Text = "הדפס";
-            // 
-            // preferences_btn
-            // 
-            this.preferences_btn.Name = "preferences_btn";
-            this.preferences_btn.Size = new System.Drawing.Size(115, 22);
-            this.preferences_btn.Text = "העדפות";
+            this.export_btn.Size = new System.Drawing.Size(152, 22);
+            this.export_btn.Text = "יצא ל Exel ...";
             // 
             // settings_btn
             // 
             this.settings_btn.Name = "settings_btn";
-            this.settings_btn.Size = new System.Drawing.Size(115, 22);
+            this.settings_btn.Size = new System.Drawing.Size(152, 22);
             this.settings_btn.Text = "הגדרות";
             this.settings_btn.Click += new System.EventHandler(this.settings_btn_Click);
             // 
@@ -295,9 +282,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem export_btn;
-        private System.Windows.Forms.ToolStripMenuItem excelFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem print_btn;
-        private System.Windows.Forms.ToolStripMenuItem preferences_btn;
         private System.Windows.Forms.ToolStripMenuItem about_btn;
         private System.Windows.Forms.GroupBox filter_grbx;
         private System.Windows.Forms.ComboBox time_cmbx;
@@ -311,6 +295,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total_avail_time_col;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem settings_btn;
+        private System.Windows.Forms.Button test_btn;
 
 
     }

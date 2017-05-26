@@ -37,13 +37,13 @@ namespace ClassMate.Parsers
         private static SapirParser instance = null;
         //adding locking object
         private static readonly object syncRoot = new object();
-        private SapirParser() 
+        public SapirParser() 
         {
             web_obj_ = new HtmlWeb();
             classes_hours_ = new Dictionary<string, ClassRoom>();
         }
 
-        public static SapirParser Instance
+      /*  public static SapirParser Instance
         {
             get
             {
@@ -59,7 +59,7 @@ namespace ClassMate.Parsers
                 }
                 return instance;
             }
-        }
+        }*/
 
         public void loadDataFromHTML(string url)
         {
