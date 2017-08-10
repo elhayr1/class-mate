@@ -8,7 +8,7 @@ namespace ClassMate.Parsers
 {
     interface Parser
     {
-        void loadDataFromHTML(string url);
+        void LoadDataFromHTML(string url);
     }
 
     

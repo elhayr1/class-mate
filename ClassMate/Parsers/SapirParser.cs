@@ -61,7 +61,7 @@ namespace ClassMate.Parsers
             }
         }*/
 
-        public void loadDataFromHTML(string url)
+        public void LoadDataFromHTML(string url)
         {
             try
             {

@@ -28,10 +28,6 @@ namespace ClassMate
           
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -40,7 +36,9 @@ namespace ClassMate
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (settings_form_ == null || settings_form_.IsDisposed)
+                settings_form_ = new SettingsForm();
+            settings_form_.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -117,17 +115,12 @@ namespace ClassMate
             }
         }
 
-        //TODO: ADD EXPORT HOURS TO FILE CAPABILITY
         private void search_btn_Click(object sender, EventArgs e)
         {
-            //TODO: disable button while doing work
-            //TODO: try decrease amount of memo this exe takes from RAM. now it takes about 12MB
             search_btn.Enabled = false;
             results_table.Rows.Clear();
             SapirParser parser = new SapirParser();
-            //SapirParser.Instance.loadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
-            //Dictionary<string, ClassRoom> classes_hours_ = SapirParser.Instance.getClassesHours();
-            parser.loadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
+            parser.LoadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
             var classes_hours = parser.getClassesHours();
 
             string time_selection = time_cmbx.SelectedItem.ToString();
@@ -172,49 +165,12 @@ namespace ClassMate
             initFilterLists();
         }
 
-        private void settings_btn_Click(object sender, EventArgs e)
-        {
-            if (settings_form_ == null)
-            {
-                settings_form_ = new SettingsForm();
-                settings_form_.Show();
-            }
-        }
-
         private void about_btn_Click(object sender, EventArgs e)
         {
-            if (about_form_ == null)
-            {
+            if (about_form_ == null || about_form_.IsDisposed)
                 about_form_ = new AboutForm();
-                about_form_.Show();
-            }
-            about_form_.Restore();
-            about_form_.Focus();
-        }
+            about_form_.Show();
 
-        private void test_btn_Click(object sender, EventArgs e)
-        {
-            Hour h = new Hour(10, 30) - new Hour(10, 27);
-        }
-    }
-}
-
-//extension for restoring minimized form to noraml state
-namespace System.Windows.Forms
-{
-    public static class Extensions
-    {
-        [DllImport( "user32.dll" )]
-        private static extern int ShowWindow( IntPtr hWnd, uint Msg );
-
-        private const uint SW_RESTORE = 0x09;
-
-        public static void Restore( this Form form )
-        {
-            if (form.WindowState == FormWindowState.Minimized)
-            {
-                ShowWindow(form.Handle, SW_RESTORE);
-            }
         }
     }
 }

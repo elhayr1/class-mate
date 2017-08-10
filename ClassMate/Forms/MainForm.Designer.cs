@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.filter_grbx = new System.Windows.Forms.GroupBox();
-            this.test_btn = new System.Windows.Forms.Button();
             this.time_cmbx = new System.Windows.Forms.ComboBox();
+            this.search_btn = new System.Windows.Forms.Button();
             this.day_cmbx = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.search_btn = new System.Windows.Forms.Button();
             this.results_table = new System.Windows.Forms.DataGridView();
             this.class_id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.building_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,8 +42,6 @@
             this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.export_btn = new System.Windows.Forms.ToolStripMenuItem();
-            this.settings_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.about_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.filter_grbx.SuspendLayout();
@@ -55,8 +52,8 @@
             // 
             // filter_grbx
             // 
-            this.filter_grbx.Controls.Add(this.test_btn);
             this.filter_grbx.Controls.Add(this.time_cmbx);
+            this.filter_grbx.Controls.Add(this.search_btn);
             this.filter_grbx.Controls.Add(this.day_cmbx);
             this.filter_grbx.Controls.Add(this.label2);
             this.filter_grbx.Controls.Add(this.label1);
@@ -68,16 +65,6 @@
             this.filter_grbx.TabStop = false;
             this.filter_grbx.Text = "סנן";
             // 
-            // test_btn
-            // 
-            this.test_btn.Location = new System.Drawing.Point(15, 19);
-            this.test_btn.Name = "test_btn";
-            this.test_btn.Size = new System.Drawing.Size(75, 23);
-            this.test_btn.TabIndex = 5;
-            this.test_btn.Text = "test";
-            this.test_btn.UseVisualStyleBackColor = true;
-            this.test_btn.Click += new System.EventHandler(this.test_btn_Click);
-            // 
             // time_cmbx
             // 
             this.time_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -86,6 +73,16 @@
             this.time_cmbx.Size = new System.Drawing.Size(101, 21);
             this.time_cmbx.TabIndex = 3;
             this.time_cmbx.SelectedIndexChanged += new System.EventHandler(this.time_from_cmbx_SelectedIndexChanged);
+            // 
+            // search_btn
+            // 
+            this.search_btn.Location = new System.Drawing.Point(13, 40);
+            this.search_btn.Name = "search_btn";
+            this.search_btn.Size = new System.Drawing.Size(90, 21);
+            this.search_btn.TabIndex = 2;
+            this.search_btn.Text = "חפש";
+            this.search_btn.UseVisualStyleBackColor = true;
+            this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
             // 
             // day_cmbx
             // 
@@ -116,16 +113,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "יום:";
             // 
-            // search_btn
-            // 
-            this.search_btn.Location = new System.Drawing.Point(3, 290);
-            this.search_btn.Name = "search_btn";
-            this.search_btn.Size = new System.Drawing.Size(90, 30);
-            this.search_btn.TabIndex = 2;
-            this.search_btn.Text = "חפש";
-            this.search_btn.UseVisualStyleBackColor = true;
-            this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
-            // 
             // results_table
             // 
             this.results_table.AllowUserToAddRows = false;
@@ -139,11 +126,11 @@
             this.floor_col,
             this.avail_time_col,
             this.total_avail_time_col});
-            this.results_table.Location = new System.Drawing.Point(3, 92);
+            this.results_table.Location = new System.Drawing.Point(3, 85);
             this.results_table.Name = "results_table";
             this.results_table.ReadOnly = true;
             this.results_table.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.results_table.Size = new System.Drawing.Size(403, 185);
+            this.results_table.Size = new System.Drawing.Size(403, 227);
             this.results_table.TabIndex = 1;
             this.results_table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -204,26 +191,10 @@
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.export_btn,
-            this.settings_btn});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.fileToolStripMenuItem.Text = "קובץ";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.fileToolStripMenuItem.Text = "הגדרות";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
-            // 
-            // export_btn
-            // 
-            this.export_btn.Name = "export_btn";
-            this.export_btn.Size = new System.Drawing.Size(152, 22);
-            this.export_btn.Text = "יצא ל Exel ...";
-            // 
-            // settings_btn
-            // 
-            this.settings_btn.Name = "settings_btn";
-            this.settings_btn.Size = new System.Drawing.Size(152, 22);
-            this.settings_btn.Text = "הגדרות";
-            this.settings_btn.Click += new System.EventHandler(this.settings_btn_Click);
             // 
             // about_btn
             // 
@@ -237,15 +208,13 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.filter_grbx, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.search_btn, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.results_table, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 38);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.0219F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.9781F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(413, 323);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.26582F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.73418F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(413, 316);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // Form1
@@ -281,7 +250,6 @@
         private System.Windows.Forms.Button search_btn;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem export_btn;
         private System.Windows.Forms.ToolStripMenuItem about_btn;
         private System.Windows.Forms.GroupBox filter_grbx;
         private System.Windows.Forms.ComboBox time_cmbx;
@@ -294,8 +262,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn avail_time_col;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_avail_time_col;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem settings_btn;
-        private System.Windows.Forms.Button test_btn;
 
 
     }
