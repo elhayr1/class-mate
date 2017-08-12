@@ -116,33 +116,36 @@ namespace ClassMate
 
         private void search_btn_Click(object sender, EventArgs e)
         {
+            searchBtn.Text = "המתן...";
             searchBtn.Enabled = false;
-            resultTable.Rows.Clear();
-            SapirParser parser = new SapirParser();
-            parser.LoadDataFromHTML(SapirParser.getDayURL(dayCmbx.SelectedItem.ToString()));
-            var classesHours = parser.getClassesHours();
 
+            SapirParser parser = new SapirParser();
+            resultTable.Rows.Clear();
+            parser.LoadDataFromHTML(SapirParser.GetDayURL(dayCmbx.SelectedItem.ToString()));
             string timeSelection = timeCmbx.SelectedItem.ToString();
             Hour fromTimerHour = new Hour(timeSelection.Replace("(עכשיו)", ""));
+            var classesHours = parser.GetClassesHours();
             foreach (KeyValuePair<string, ClassRoom> classEntry in classesHours)
             {
                 Console.Write("Class {0}: ", classEntry.Value.ID.ToString());
                 classEntry.Value.HoursList.PrintList();
-
                 var freeTime = classEntry.Value.HoursList.GetFreeTime(fromTimerHour);
-
                 if (freeTime != null)
                 {
                     Console.WriteLine("{0}  Total time: {1}", freeTime.fromTo.ToString(), freeTime.totalTime.ToString());
-                    if (freeTime.totalTime > new Hour(0,0))
+                    if (freeTime.totalTime > new Hour(0, 0))
+                    {
                         resultTable.Rows.Add(classEntry.Value.ID,
                                                 classEntry.Value.Building,
                                                 classEntry.Value.Floor,
                                                 freeTime.fromTo.ToHebString(),
                                                 freeTime.totalTime);
+                    }
                 }
             }
+
             searchBtn.Enabled = true;
+            searchBtn.Text = "חפש";
         }
 
 
@@ -169,6 +172,11 @@ namespace ClassMate
             if (aboutForm_ == null || aboutForm_.IsDisposed)
                 aboutForm_ = new AboutForm();
             aboutForm_.Show();
+
+        }
+
+        private void searchPbar_Click(object sender, EventArgs e)
+        {
 
         }
     }

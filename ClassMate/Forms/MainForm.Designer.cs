@@ -43,8 +43,9 @@
             this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.about_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.searchPbar = new System.Windows.Forms.ProgressBar();
             this.filterGrbx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -53,6 +54,7 @@
             // 
             // filterGrbx
             // 
+            this.filterGrbx.Controls.Add(this.searchPbar);
             this.filterGrbx.Controls.Add(this.timeCmbx);
             this.filterGrbx.Controls.Add(this.searchBtn);
             this.filterGrbx.Controls.Add(this.dayCmbx);
@@ -197,6 +199,13 @@
             this.fileToolStripMenuItem.Text = "הגדרות";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
+            // about_btn
+            // 
+            this.about_btn.Name = "about_btn";
+            this.about_btn.Size = new System.Drawing.Size(48, 20);
+            this.about_btn.Text = "אודות";
+            this.about_btn.Click += new System.EventHandler(this.about_btn_Click);
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -211,12 +220,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(413, 316);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // about_btn
+            // searchPbar
             // 
-            this.about_btn.Name = "about_btn";
-            this.about_btn.Size = new System.Drawing.Size(48, 20);
-            this.about_btn.Text = "אודות";
-            this.about_btn.Click += new System.EventHandler(this.about_btn_Click);
+            this.searchPbar.Location = new System.Drawing.Point(13, 14);
+            this.searchPbar.Name = "searchPbar";
+            this.searchPbar.Size = new System.Drawing.Size(90, 19);
+            this.searchPbar.TabIndex = 4;
+            this.searchPbar.Visible = false;
+            this.searchPbar.Click += new System.EventHandler(this.searchPbar_Click);
             // 
             // MainForm
             // 
@@ -263,6 +274,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total_avail_time_col;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem about_btn;
+        private System.Windows.Forms.ProgressBar searchPbar;
 
 
     }

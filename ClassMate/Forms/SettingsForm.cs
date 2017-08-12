@@ -28,7 +28,7 @@ namespace ClassMate.Forms
             friday_url_txtbx.Text = Properties.Settings.Default.friday_url;
         }
 
-        private void updateURLs()
+        private void UpdateURLs()
         {
             Properties.Settings.Default.sunday_url = sunday_url_txtbx.Text;
             Properties.Settings.Default.monday_url = monday_url_txtbx.Text;
@@ -43,7 +43,7 @@ namespace ClassMate.Forms
 
         private void apply_btn_Click(object sender, EventArgs e)
         {
-            updateURLs();
+            UpdateURLs();
         }
     }
 }

@@ -25,17 +25,14 @@ namespace ClassMate.Parsers
         public const int FIRST_CLASS_INDEX = 5;
         public const int BETWEEN_CLASSES_OFFSET = 7;
 
-        private HtmlWeb web_obj_;
-        private HtmlAgilityPack.HtmlDocument html_doc_;
-        private Dictionary<string, ClassRoom> classes_hours_;
+        private HtmlWeb webObj_;
+        private HtmlAgilityPack.HtmlDocument HTMLDoc_;
+        private Dictionary<string, ClassRoom> classesHours_;
 
-        private static SapirParser instance = null;
-        //adding locking object
-        private static readonly object syncRoot = new object();
         public SapirParser() 
         {
-            web_obj_ = new HtmlWeb();
-            classes_hours_ = new Dictionary<string, ClassRoom>();
+            webObj_ = new HtmlWeb();
+            classesHours_ = new Dictionary<string, ClassRoom>();
         }
 
         public void LoadDataFromHTML(string url)
@@ -44,7 +41,7 @@ namespace ClassMate.Parsers
             {
                 try
                 {
-                    html_doc_ = web_obj_.Load(url);
+                    HTMLDoc_ = webObj_.Load(url);
                 }
                 catch (System.UriFormatException)
                 {
@@ -65,71 +62,62 @@ namespace ClassMate.Parsers
                                 MessageBoxIcon.Error);
                 return;
             }
-           var node = html_doc_.DocumentNode.SelectNodes(CLASSES_TAG);
-           int num_of_records = node.Count();
+           var node = HTMLDoc_.DocumentNode.SelectNodes(CLASSES_TAG);
+           int numOfRecords = node.Count();
 
           // Console.Write(node[0].InnerText);
 
-            string class_id = "";
-            HourNode hours_window = null;
-            HoursOrderedLinkedList temp_hours_linked_list = null;
+            string classId = "";
+            HourNode hoursWindow = null;
+            HoursOrderedLinkedList tempHoursList = null;
 
             for (int i = FIRST_CLASS_INDEX;
-                 i < num_of_records;
+                 i < numOfRecords;
                  i += BETWEEN_CLASSES_OFFSET)
             {
-                class_id = Regex.Match(node[i + 1].InnerText, @"\d+").Value;
+                classId = Regex.Match(node[i + 1].InnerText, @"\d+").Value;
                 //Sapir HTML is fucked up, so check if class name is legal first
-                if (class_id != "")
+                if (classId != "")
                 {
-                    hours_window = new HourNode(node[i].InnerText);
-                    ClassRoom temp_class = new ClassRoom(class_id);
+                    hoursWindow = new HourNode(node[i].InnerText);
+                    ClassRoom tempClass = new ClassRoom(classId);
                     //test regex:
-                    Console.Write(node[i + 1].InnerText + ": "); Console.WriteLine(class_id);
+                    Console.Write(node[i + 1].InnerText + ": "); Console.WriteLine(classId);
 
-                    if (!classes_hours_.ContainsKey(class_id))
+                    if (!classesHours_.ContainsKey(classId))
                     {
-                        temp_hours_linked_list = new HoursOrderedLinkedList();
-                        temp_hours_linked_list.Add(hours_window);
-                        temp_class.attachHours(temp_hours_linked_list);
-                        classes_hours_.Add(class_id, temp_class);
-                        temp_hours_linked_list = null;
-                        temp_class = null;
+                        tempHoursList = new HoursOrderedLinkedList();
+                        tempHoursList.Add(hoursWindow);
+                        tempClass.attachHours(tempHoursList);
+                        classesHours_.Add(classId, tempClass);
+                        tempHoursList = null;
+                        tempClass = null;
                     }
                     else
                     {
-                        classes_hours_.TryGetValue(class_id, out temp_class);
-                        temp_class.addHourNode(hours_window);
+                        classesHours_.TryGetValue(classId, out tempClass);
+                        tempClass.addHourNode(hoursWindow);
                     }
 
-                    class_id = "";
-                    hours_window = null;
+                    classId = "";
+                    hoursWindow = null;
                 }
             }
         }
 
-       
-
-        public void loadDataToFile()
-        {
-            
-        }
-
-        public ClassRoom getClassRoom(string class_id)
+        public ClassRoom GetClassRoom(string class_id)
         {
             ClassRoom result = new ClassRoom(class_id);
-            classes_hours_.TryGetValue(class_id, out result);
-            //temp_hours_linked_list.printList();
-            //Console.WriteLine(temp_hours_linked_list.size());
+            classesHours_.TryGetValue(class_id, out result);
             return result;
         }
 
-        public Dictionary<string, ClassRoom> getClassesHours()
+        public Dictionary<string, ClassRoom> GetClassesHours()
         {
-            return classes_hours_;
+            return classesHours_;
         }
 
-        public static string getDayURL(string day)
+        public static string GetDayURL(string day)
         {
             switch (day)
             {
@@ -146,7 +134,7 @@ namespace ClassMate.Parsers
                 case "שישי":
                     return Properties.Settings.Default.friday_url;
                 case "היום":
-                    return getDayURL(HebrewDay.IntDayToString((int)DateTime.Now.DayOfWeek));
+                    return GetDayURL(HebrewDay.IntDayToString((int)DateTime.Now.DayOfWeek));
             }
             return "";
         }
