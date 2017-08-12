@@ -8,13 +8,13 @@ namespace ClassMate.Parsers
 {
     class FreeTime
     {
-        public HourNode from_to {get; private set;}
-        public Hour total_time {get; private set;}
+        public HourNode fromTo {get; private set;}
+        public Hour totalTime {get; private set;}
 
         public FreeTime(Hour from, Hour to)
         {
-            from_to = new HourNode(from, to);
-            total_time = to - from;
+            fromTo = new HourNode(from, to);
+            totalTime = to - from;
         }
     }
 }

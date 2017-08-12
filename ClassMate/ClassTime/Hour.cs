@@ -9,14 +9,31 @@ namespace ClassMate.Parsers
     class Hour
     {
         private const int MINUTES = 1, HOURS = 0;
-        private int[] hour_time = new int[2];
-        public Hour(string hour_time_in)
+        private int[] hourTime = new int[2];
+
+        public int Minutes
+        {
+            get
+            {
+                return hourTime[MINUTES];
+            }
+        }
+
+        public int Hours
+        {
+            get
+            {
+                return hourTime[HOURS];
+            }
+        }
+
+        public Hour(string hourTimeIn)
         {
             // try
             // {
-            var hours_minutes_pair = hour_time_in.Split(':');
-            hour_time[HOURS] = int.Parse(hours_minutes_pair[HOURS]);
-            hour_time[MINUTES] = int.Parse(hours_minutes_pair[MINUTES]);
+            var hoursMinutesPair = hourTimeIn.Split(':');
+            hourTime[HOURS] = int.Parse(hoursMinutesPair[HOURS]);
+            hourTime[MINUTES] = int.Parse(hoursMinutesPair[MINUTES]);
             // } catch (Exception e)
             // {
 
@@ -26,18 +43,8 @@ namespace ClassMate.Parsers
 
         public Hour(int hour, int mins)
         {
-            hour_time[HOURS] = hour;
-            hour_time[MINUTES] = mins;
-        }
-
-        public int getMinutes()
-        {
-            return hour_time[MINUTES];
-        }
-
-        public int getHours()
-        {
-            return hour_time[HOURS];
+            hourTime[HOURS] = hour;
+            hourTime[MINUTES] = mins;
         }
 
         public override bool Equals(Object other)
@@ -47,8 +54,8 @@ namespace ClassMate.Parsers
             Hour other_hour = other as Hour;
             if ((System.Object)other_hour == null) { return false; }
 
-            if (this.getHours() == other_hour.getHours() &&
-                this.getMinutes() == other_hour.getMinutes())
+            if (this.Hours == other_hour.Hours &&
+                this.Minutes == other_hour.Minutes)
                 return true;
             return false;
         }
@@ -56,31 +63,31 @@ namespace ClassMate.Parsers
         public static Hour operator -(Hour higher_hour, Hour lower_hour)
         {
 
-            int hour_delta = higher_hour.getHours() -
-                                lower_hour.getHours();
+            int hour_delta = higher_hour.Hours -
+                                lower_hour.Hours;
             int mins_delta = 0;
-            if (higher_hour.getMinutes() >
-                lower_hour.getMinutes())
-                mins_delta = higher_hour.getMinutes() -
-                                lower_hour.getMinutes();
+            if (higher_hour.Minutes >
+                lower_hour.Minutes)
+                mins_delta = higher_hour.Minutes -
+                                lower_hour.Minutes;
 
-            else if (higher_hour.getMinutes() <
-              lower_hour.getMinutes())
+            else if (higher_hour.Minutes <
+              lower_hour.Minutes)
             {
                 hour_delta--;
-                mins_delta = 60 + higher_hour.getMinutes() -
-                               lower_hour.getMinutes();
+                mins_delta = 60 + higher_hour.Minutes -
+                               lower_hour.Minutes;
             }
             return new Hour(hour_delta, mins_delta);
         }
 
         public static bool operator <(Hour hour1, Hour hour2)
         {
-            if (hour1.getHours() < hour2.getHours())
+            if (hour1.Hours < hour2.Hours)
                 return true;
 
-            if (hour1.getHours() == hour2.getHours() &&
-                hour1.getMinutes() < hour2.getMinutes()) 
+            if (hour1.Hours == hour2.Hours &&
+                hour1.Minutes < hour2.Minutes) 
                 return true;
 
             return false;
@@ -109,14 +116,17 @@ namespace ClassMate.Parsers
 
         public override string ToString()
         {
-            string mins = getMinutes() < 10 ? "0" + getMinutes().ToString() : getMinutes().ToString();
-            return getHours() + ":" + mins;
+            string mins = Minutes < 10 ? "0" + Minutes.ToString() : Minutes.ToString();
+            return Minutes + ":" + mins;
         }
 
-        public static Hour now() 
+
+        public static Hour Now() 
         {
             return new Hour(DateTime.Now.ToString("HH:mm"));
         }
+
+
     }
 
 }

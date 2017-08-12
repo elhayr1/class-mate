@@ -69,13 +69,14 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Parsers\Parser.cs" />
-    <Compile Include="Src\ClassRoom.cs" />
+    <Compile Include="ClassTime\ClassRoom.cs" />
     <Compile Include="Parsers\SapirParser.cs" />
-    <Compile Include="Src\FreeTime.cs" />
-    <Compile Include="Src\Hour.cs" />
-    <Compile Include="Src\HoursOrderedLinkedList.cs" />
-    <Compile Include="Src\HourNode.cs" />
-    <Compile Include="Src\program.cs" />
+    <Compile Include="ClassTime\HebrewDay.cs" />
+    <Compile Include="ClassTime\FreeTime.cs" />
+    <Compile Include="ClassTime\Hour.cs" />
+    <Compile Include="ClassTime\HoursOrderedLinkedList.cs" />
+    <Compile Include="ClassTime\HourNode.cs" />
+    <Compile Include="program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>

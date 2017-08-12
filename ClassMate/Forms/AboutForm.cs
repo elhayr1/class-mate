@@ -22,5 +22,10 @@ namespace ClassMate.Forms
         {
 
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

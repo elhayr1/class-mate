@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.links_grbx = new System.Windows.Forms.GroupBox();
             this.monday_url_txtbx = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.apply_btn = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.links_grbx.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,6 +195,11 @@
             this.apply_btn.UseVisualStyleBackColor = true;
             this.apply_btn.Click += new System.EventHandler(this.apply_btn_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,6 +208,8 @@
             this.Controls.Add(this.links_grbx);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.apply_btn);
+            this.MaximumSize = new System.Drawing.Size(370, 322);
+            this.MinimumSize = new System.Drawing.Size(370, 322);
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
@@ -227,5 +236,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button apply_btn;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

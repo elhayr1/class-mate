@@ -10,21 +10,21 @@ using System.Windows.Forms;
 using ClassMate.Parsers;
 using ClassMate.Forms;
 using System.Runtime.InteropServices;
-
+using ClassMate.ClassTime;
 
 namespace ClassMate
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        SettingsForm settings_form_;
-        AboutForm about_form_;
-        bool lock_triggers_;
+        SettingsForm settingsForm_;
+        AboutForm aboutForm_;
+        bool controlsChangesLock_;
         
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             this.CenterToScreen();
-            results_table.AutoGenerateColumns = false;
+            resultTable.AutoGenerateColumns = false;
           
         }
 
@@ -36,114 +36,113 @@ namespace ClassMate
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (settings_form_ == null || settings_form_.IsDisposed)
-                settings_form_ = new SettingsForm();
-            settings_form_.Show();
+            if (settingsForm_ == null || settingsForm_.IsDisposed)
+                settingsForm_ = new SettingsForm();
+            settingsForm_.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            initFilterLists();
+            InitFilterLists();
         }
 
-        private void initFilterLists()
+        private void InitFilterLists()
         {
-            lock_triggers_ = true;
-            fillDaysList();
-            fillFromTimeList();
+            controlsChangesLock_ = true;
+            FillDaysList();
+            FillFromTimeList();
  
-            lock_triggers_ = false;
+            controlsChangesLock_ = false;
         }
 
-        private void fillDaysList()
+        private void FillDaysList()
         {
-            bool college_day = false;
+            bool collegeDay = false;
             int today = (int)DateTime.Now.DayOfWeek;
-            for (int i=0; i<=5; i++)
+            for (int dayNum=0; dayNum<=5; dayNum++)
             {
-                if (today != i)
-                    day_cmbx.Items.Add(SapirParser.intDayToString(i));
+                if (today != dayNum)
+                    dayCmbx.Items.Add(HebrewDay.IntDayToString(dayNum));
                 else
-                {
-                    day_cmbx.Items.Add("היום");
-                    college_day = true;
+                {   
+                    dayCmbx.Items.Add("היום");
+                    collegeDay = true;
                 }
             }
                
-            if (college_day)
-                day_cmbx.SelectedIndex = day_cmbx.FindStringExact("היום");
+            if (collegeDay)
+                dayCmbx.SelectedIndex = dayCmbx.FindStringExact("היום");
             else
-                day_cmbx.SelectedIndex = day_cmbx.FindStringExact("ראשון");
+                dayCmbx.SelectedIndex = dayCmbx.FindStringExact("ראשון");
         }
 
-        private void fillFromTimeList()
+        private void FillFromTimeList()
         {
-            time_cmbx.Items.Clear();
-            Hour now_hour = now_hour = new Hour(7, 0);
-            if (day_cmbx.SelectedItem.ToString() == "היום" && Hour.now() >= new Hour(7, 0))
+            timeCmbx.Items.Clear();
+            Hour nowHour = new Hour(7, 0);
+            if (dayCmbx.SelectedItem.ToString() == "היום" && Hour.Now() >= new Hour(7, 0))
             {
-                now_hour = Hour.now() >= new Hour(7, 0) ? Hour.now() : new Hour(7, 0);
-                time_cmbx.Items.Add(now_hour + " (עכשיו)");
+                nowHour = Hour.Now() >= new Hour(7, 0) ? Hour.Now() : new Hour(7, 0);
+                timeCmbx.Items.Add(nowHour + " (עכשיו)");
             }
-                
 
-            for (int hour = now_hour.getHours(); hour <= 23; hour++)
+            for (int hour = nowHour.Hours; hour <= 23; hour++)
             {
-                time_cmbx.Items.Add(hour + ":00");
-                time_cmbx.Items.Add(hour + ":30");
+                timeCmbx.Items.Add(hour + ":00");
+                timeCmbx.Items.Add(hour + ":30");
             }
-            time_cmbx.SelectedIndex = 0;
+            timeCmbx.SelectedIndex = 0;
         }
 
         private void time_from_cmbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!lock_triggers_)
+            if (!controlsChangesLock_)
             {
-                lock_triggers_ = true;
-                lock_triggers_ = false;
+                controlsChangesLock_ = true;
+                controlsChangesLock_ = false;
             }
         }
         
         private void day_cmbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!lock_triggers_)
+            if (!controlsChangesLock_)
             {
-               lock_triggers_ = true;
-               fillFromTimeList();
-               time_cmbx.SelectedIndex = 0;
-               lock_triggers_ = false;
+               controlsChangesLock_ = true;
+               FillFromTimeList();
+               timeCmbx.SelectedIndex = 0;
+               controlsChangesLock_ = false;
             }
         }
 
         private void search_btn_Click(object sender, EventArgs e)
         {
-            search_btn.Enabled = false;
-            results_table.Rows.Clear();
+            searchBtn.Enabled = false;
+            resultTable.Rows.Clear();
             SapirParser parser = new SapirParser();
-            parser.LoadDataFromHTML(SapirParser.getDayURL(day_cmbx.SelectedItem.ToString()));
-            var classes_hours = parser.getClassesHours();
+            parser.LoadDataFromHTML(SapirParser.getDayURL(dayCmbx.SelectedItem.ToString()));
+            var classesHours = parser.getClassesHours();
 
-            string time_selection = time_cmbx.SelectedItem.ToString();
-            Hour from_time_hour = new Hour(time_selection.Replace("(עכשיו)", ""));
-            foreach (KeyValuePair<string, ClassRoom> class_entry in classes_hours)
+            string timeSelection = timeCmbx.SelectedItem.ToString();
+            Hour fromTimerHour = new Hour(timeSelection.Replace("(עכשיו)", ""));
+            foreach (KeyValuePair<string, ClassRoom> classEntry in classesHours)
             {
-                Console.Write("Class {0}: ", class_entry.Value.getID().ToString());
-                class_entry.Value.getHoursList().printList();
+                Console.Write("Class {0}: ", classEntry.Value.ID.ToString());
+                classEntry.Value.HoursList.PrintList();
 
-                var free_time = class_entry.Value.getHoursList().getFreeTime(from_time_hour);
+                var freeTime = classEntry.Value.HoursList.GetFreeTime(fromTimerHour);
 
-                if (free_time != null)
+                if (freeTime != null)
                 {
-                    Console.WriteLine("{0}  Total time: {1}", free_time.from_to.ToString(), free_time.total_time.ToString());
-                    if (free_time.total_time > new Hour(0,0))
-                        results_table.Rows.Add(class_entry.Value.getID(),
-                                                class_entry.Value.getBuilding(),
-                                                class_entry.Value.getFloor(),
-                                                free_time.from_to.ToHebString(),
-                                                free_time.total_time);
+                    Console.WriteLine("{0}  Total time: {1}", freeTime.fromTo.ToString(), freeTime.totalTime.ToString());
+                    if (freeTime.totalTime > new Hour(0,0))
+                        resultTable.Rows.Add(classEntry.Value.ID,
+                                                classEntry.Value.Building,
+                                                classEntry.Value.Floor,
+                                                freeTime.fromTo.ToHebString(),
+                                                freeTime.totalTime);
                 }
             }
-            search_btn.Enabled = true;
+            searchBtn.Enabled = true;
         }
 
 
@@ -159,17 +158,17 @@ namespace ClassMate
 
         private void fast_srch_rbtn_CheckedChanged(object sender, EventArgs e)
         {
-            filter_grbx.Enabled = false;
-            time_cmbx.Items.Clear();
-            day_cmbx.Items.Clear();
-            initFilterLists();
+            filterGrbx.Enabled = false;
+            timeCmbx.Items.Clear();
+            dayCmbx.Items.Clear();
+            InitFilterLists();
         }
 
         private void about_btn_Click(object sender, EventArgs e)
         {
-            if (about_form_ == null || about_form_.IsDisposed)
-                about_form_ = new AboutForm();
-            about_form_.Show();
+            if (aboutForm_ == null || aboutForm_.IsDisposed)
+                aboutForm_ = new AboutForm();
+            aboutForm_.Show();
 
         }
     }

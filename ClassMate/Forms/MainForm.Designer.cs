@@ -1,7 +1,8 @@
 ﻿namespace ClassMate
 {
-    partial class Form1
+    partial class MainForm
     {
+        //BlueSky Software, Elchay Rauper
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -28,13 +29,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.filter_grbx = new System.Windows.Forms.GroupBox();
-            this.time_cmbx = new System.Windows.Forms.ComboBox();
-            this.search_btn = new System.Windows.Forms.Button();
-            this.day_cmbx = new System.Windows.Forms.ComboBox();
+            this.filterGrbx = new System.Windows.Forms.GroupBox();
+            this.timeCmbx = new System.Windows.Forms.ComboBox();
+            this.searchBtn = new System.Windows.Forms.Button();
+            this.dayCmbx = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.results_table = new System.Windows.Forms.DataGridView();
+            this.resultTable = new System.Windows.Forms.DataGridView();
             this.class_id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.building_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.floor_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,56 +43,56 @@
             this.total_avail_time_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.about_btn = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.filter_grbx.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.results_table)).BeginInit();
+            this.about_btn = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterGrbx.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // filter_grbx
+            // filterGrbx
             // 
-            this.filter_grbx.Controls.Add(this.time_cmbx);
-            this.filter_grbx.Controls.Add(this.search_btn);
-            this.filter_grbx.Controls.Add(this.day_cmbx);
-            this.filter_grbx.Controls.Add(this.label2);
-            this.filter_grbx.Controls.Add(this.label1);
-            this.filter_grbx.Location = new System.Drawing.Point(3, 3);
-            this.filter_grbx.Name = "filter_grbx";
-            this.filter_grbx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.filter_grbx.Size = new System.Drawing.Size(403, 73);
-            this.filter_grbx.TabIndex = 3;
-            this.filter_grbx.TabStop = false;
-            this.filter_grbx.Text = "סנן";
+            this.filterGrbx.Controls.Add(this.timeCmbx);
+            this.filterGrbx.Controls.Add(this.searchBtn);
+            this.filterGrbx.Controls.Add(this.dayCmbx);
+            this.filterGrbx.Controls.Add(this.label2);
+            this.filterGrbx.Controls.Add(this.label1);
+            this.filterGrbx.Location = new System.Drawing.Point(3, 3);
+            this.filterGrbx.Name = "filterGrbx";
+            this.filterGrbx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.filterGrbx.Size = new System.Drawing.Size(403, 73);
+            this.filterGrbx.TabIndex = 3;
+            this.filterGrbx.TabStop = false;
+            this.filterGrbx.Text = "סנן";
             // 
-            // time_cmbx
+            // timeCmbx
             // 
-            this.time_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.time_cmbx.Location = new System.Drawing.Point(152, 40);
-            this.time_cmbx.Name = "time_cmbx";
-            this.time_cmbx.Size = new System.Drawing.Size(101, 21);
-            this.time_cmbx.TabIndex = 3;
-            this.time_cmbx.SelectedIndexChanged += new System.EventHandler(this.time_from_cmbx_SelectedIndexChanged);
+            this.timeCmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.timeCmbx.Location = new System.Drawing.Point(152, 40);
+            this.timeCmbx.Name = "timeCmbx";
+            this.timeCmbx.Size = new System.Drawing.Size(101, 21);
+            this.timeCmbx.TabIndex = 3;
+            this.timeCmbx.SelectedIndexChanged += new System.EventHandler(this.time_from_cmbx_SelectedIndexChanged);
             // 
-            // search_btn
+            // searchBtn
             // 
-            this.search_btn.Location = new System.Drawing.Point(13, 40);
-            this.search_btn.Name = "search_btn";
-            this.search_btn.Size = new System.Drawing.Size(90, 21);
-            this.search_btn.TabIndex = 2;
-            this.search_btn.Text = "חפש";
-            this.search_btn.UseVisualStyleBackColor = true;
-            this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
+            this.searchBtn.Location = new System.Drawing.Point(13, 40);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(90, 21);
+            this.searchBtn.TabIndex = 2;
+            this.searchBtn.Text = "חפש";
+            this.searchBtn.UseVisualStyleBackColor = true;
+            this.searchBtn.Click += new System.EventHandler(this.search_btn_Click);
             // 
-            // day_cmbx
+            // dayCmbx
             // 
-            this.day_cmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.day_cmbx.Location = new System.Drawing.Point(309, 40);
-            this.day_cmbx.Name = "day_cmbx";
-            this.day_cmbx.Size = new System.Drawing.Size(85, 21);
-            this.day_cmbx.TabIndex = 2;
-            this.day_cmbx.SelectedIndexChanged += new System.EventHandler(this.day_cmbx_SelectedIndexChanged);
+            this.dayCmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dayCmbx.Location = new System.Drawing.Point(309, 40);
+            this.dayCmbx.Name = "dayCmbx";
+            this.dayCmbx.Size = new System.Drawing.Size(85, 21);
+            this.dayCmbx.TabIndex = 2;
+            this.dayCmbx.SelectedIndexChanged += new System.EventHandler(this.day_cmbx_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -113,26 +114,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "יום:";
             // 
-            // results_table
+            // resultTable
             // 
-            this.results_table.AllowUserToAddRows = false;
-            this.results_table.AllowUserToDeleteRows = false;
-            this.results_table.AllowUserToResizeRows = false;
-            this.results_table.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.results_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.results_table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.resultTable.AllowUserToAddRows = false;
+            this.resultTable.AllowUserToDeleteRows = false;
+            this.resultTable.AllowUserToResizeRows = false;
+            this.resultTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.resultTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.class_id_col,
             this.building_col,
             this.floor_col,
             this.avail_time_col,
             this.total_avail_time_col});
-            this.results_table.Location = new System.Drawing.Point(3, 85);
-            this.results_table.Name = "results_table";
-            this.results_table.ReadOnly = true;
-            this.results_table.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.results_table.Size = new System.Drawing.Size(403, 227);
-            this.results_table.TabIndex = 1;
-            this.results_table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.resultTable.Location = new System.Drawing.Point(3, 85);
+            this.resultTable.Name = "resultTable";
+            this.resultTable.ReadOnly = true;
+            this.resultTable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.resultTable.Size = new System.Drawing.Size(403, 227);
+            this.resultTable.TabIndex = 1;
+            this.resultTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // class_id_col
             // 
@@ -196,19 +197,12 @@
             this.fileToolStripMenuItem.Text = "הגדרות";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
-            // about_btn
-            // 
-            this.about_btn.Name = "about_btn";
-            this.about_btn.Size = new System.Drawing.Size(48, 20);
-            this.about_btn.Text = "אודות";
-            this.about_btn.Click += new System.EventHandler(this.about_btn_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.filter_grbx, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.results_table, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.filterGrbx, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.resultTable, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 38);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -217,7 +211,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(413, 316);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // Form1
+            // about_btn
+            // 
+            this.about_btn.Name = "about_btn";
+            this.about_btn.Size = new System.Drawing.Size(48, 20);
+            this.about_btn.Text = "אודות";
+            this.about_btn.Click += new System.EventHandler(this.about_btn_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -230,12 +231,12 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(449, 405);
             this.MinimumSize = new System.Drawing.Size(449, 405);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "ClassMate";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.filter_grbx.ResumeLayout(false);
-            this.filter_grbx.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.results_table)).EndInit();
+            this.filterGrbx.ResumeLayout(false);
+            this.filterGrbx.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultTable)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -246,14 +247,13 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView results_table;
-        private System.Windows.Forms.Button search_btn;
+        private System.Windows.Forms.DataGridView resultTable;
+        private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem about_btn;
-        private System.Windows.Forms.GroupBox filter_grbx;
-        private System.Windows.Forms.ComboBox time_cmbx;
-        private System.Windows.Forms.ComboBox day_cmbx;
+        private System.Windows.Forms.GroupBox filterGrbx;
+        private System.Windows.Forms.ComboBox timeCmbx;
+        private System.Windows.Forms.ComboBox dayCmbx;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn class_id_col;
@@ -262,6 +262,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn avail_time_col;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_avail_time_col;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem about_btn;
 
 
     }

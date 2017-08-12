@@ -8,25 +8,25 @@ namespace ClassMate.Parsers
 {
     class HourNode
     {
-        public const int UPPER_HOUR = 1, LOWER_HOUR = 0;
-        public string [] hour_window_;
-        public Hour upper_hour, lower_hour;
-        public HourNode next, prev;
+        private const int UPPER_HOUR = 1, LOWER_HOUR = 0;
+        private string [] hourWindow_;
+        public Hour UpperHour, LowerHour;
+        public HourNode Next, Prev;
 
         public HourNode(Hour from, Hour to)
         {
-            lower_hour = from;
-            upper_hour = to;
-            prev = next = null;
+            LowerHour = from;
+            UpperHour = to;
+            Prev = Next = null;
         }
 
         public HourNode(string hour_window)
         {
-            hour_window_ = new string[2];
-            hour_window_ = hour_window.Split('-');
-            lower_hour = new Hour(hour_window_[LOWER_HOUR]);
-            upper_hour = new Hour(hour_window_[UPPER_HOUR]);
-            prev = next = null;
+            hourWindow_ = new string[2];
+            hourWindow_ = hour_window.Split('-');
+            LowerHour = new Hour(hourWindow_[LOWER_HOUR]);
+            UpperHour = new Hour(hourWindow_[UPPER_HOUR]);
+            Prev = Next = null;
         }
 
         public override bool Equals(object other)
@@ -36,16 +36,16 @@ namespace ClassMate.Parsers
             HourNode other_hour_node = other as HourNode;
             if ((System.Object)other_hour_node == null) { return false; }
 
-            if (this.upper_hour.Equals(other_hour_node.upper_hour) &&
-                this.lower_hour.Equals(other_hour_node.lower_hour))
+            if (this.UpperHour.Equals(other_hour_node.UpperHour) &&
+                this.LowerHour.Equals(other_hour_node.LowerHour))
                 return true;
             return false;
         }
 
         public static bool operator <(HourNode hour_node1, HourNode hour_node2)
         {
-            if ((hour_node1.upper_hour < hour_node2.lower_hour) ||
-                hour_node1.upper_hour.Equals(hour_node2.lower_hour))
+            if ((hour_node1.UpperHour < hour_node2.LowerHour) ||
+                hour_node1.UpperHour.Equals(hour_node2.LowerHour))
                 return true;
             return false;
         }
@@ -56,8 +56,8 @@ namespace ClassMate.Parsers
                 !(hour_node1 < hour_node2))
                 return true;
             return false;*/
-            if ((hour_node1.lower_hour > hour_node2.upper_hour) ||
-                hour_node1.lower_hour.Equals(hour_node2.upper_hour))
+            if ((hour_node1.LowerHour > hour_node2.UpperHour) ||
+                hour_node1.LowerHour.Equals(hour_node2.UpperHour))
                 return true;
             return false;
         }
@@ -80,12 +80,12 @@ namespace ClassMate.Parsers
 
         public string ToHebString()
         {
-            return upper_hour.ToString() + " - " + lower_hour.ToString();
+            return UpperHour.ToString() + " - " + LowerHour.ToString();
         }  
 
         public override string ToString() 
         {
-            return lower_hour.ToString() + " - " + upper_hour.ToString(); 
+            return LowerHour.ToString() + " - " + UpperHour.ToString(); 
         }
 
 
